@@ -20,3 +20,7 @@ domain active {zynq_fsbl}
 domain active {standalone_ps7_cortexa9_0}
 platform generate -quick
 platform generate
+platform clean
+platform generate
+platform config -updatehw {C:/Users/YNakagami/Develop/projects/mitou2023/ClangPU/design_1_wrapper.xsa}
+platform generate -domains 

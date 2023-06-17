@@ -35,6 +35,7 @@ proc ps7_clock_init_data_3_0 {} {
     mask_write 0XF8000154 0x00003F33 0x00000A02
     mask_write 0XF8000168 0x00003F31 0x00000501
     mask_write 0XF8000170 0x03F03F30 0x00400500
+    mask_write 0XF8000190 0x03F03F30 0x00400500
     mask_write 0XF80001C4 0x00000001 0x00000001
     mask_write 0XF800012C 0x01FFCCCD 0x01EC044D
     mwr -force 0XF8000004 0x0000767B
@@ -221,6 +222,8 @@ proc ps7_post_config_3_0 {} {
     mwr -force 0XF8000008 0x0000DF0D
     mask_write 0XF8000900 0x0000000F 0x0000000F
     mask_write 0XF8000240 0xFFFFFFFF 0x00000000
+    mask_write 0XF8008000 0x00000001 0x00000001
+    mask_write 0XF8008014 0x00000001 0x00000001
     mwr -force 0XF8000004 0x0000767B
 }
 proc ps7_debug_3_0 {} {
@@ -265,6 +268,7 @@ proc ps7_clock_init_data_2_0 {} {
     mask_write 0XF8000154 0x00003F33 0x00000A02
     mask_write 0XF8000168 0x00003F31 0x00000501
     mask_write 0XF8000170 0x03F03F30 0x00400500
+    mask_write 0XF8000190 0x03F03F30 0x00400500
     mask_write 0XF80001C4 0x00000001 0x00000001
     mask_write 0XF800012C 0x01FFCCCD 0x01EC044D
     mwr -force 0XF8000004 0x0000767B
@@ -452,6 +456,8 @@ proc ps7_post_config_2_0 {} {
     mwr -force 0XF8000008 0x0000DF0D
     mask_write 0XF8000900 0x0000000F 0x0000000F
     mask_write 0XF8000240 0xFFFFFFFF 0x00000000
+    mask_write 0XF8008000 0x00000001 0x00000001
+    mask_write 0XF8008014 0x00000001 0x00000001
     mwr -force 0XF8000004 0x0000767B
 }
 proc ps7_debug_2_0 {} {
@@ -496,6 +502,7 @@ proc ps7_clock_init_data_1_0 {} {
     mask_write 0XF8000154 0x00003F33 0x00000A02
     mask_write 0XF8000168 0x00003F31 0x00000501
     mask_write 0XF8000170 0x03F03F30 0x00400500
+    mask_write 0XF8000190 0x03F03F30 0x00400500
     mask_write 0XF80001C4 0x00000001 0x00000001
     mask_write 0XF800012C 0x01FFCCCD 0x01EC044D
     mwr -force 0XF8000004 0x0000767B
@@ -681,6 +688,8 @@ proc ps7_post_config_1_0 {} {
     mwr -force 0XF8000008 0x0000DF0D
     mask_write 0XF8000900 0x0000000F 0x0000000F
     mask_write 0XF8000240 0xFFFFFFFF 0x00000000
+    mask_write 0XF8008000 0x00000001 0x00000001
+    mask_write 0XF8008014 0x00000001 0x00000001
     mwr -force 0XF8000004 0x0000767B
 }
 proc ps7_debug_1_0 {} {

@@ -120,4 +120,6 @@ module core #
     // Rチャネル
     assign M_AXI_RREADY  = 1'b0;    // *
 
+    assign STAT = 8'd124;
+
 endmodule

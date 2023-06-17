@@ -126,6 +126,11 @@
 /******************************************************************/
 
 
+/* Peripheral Definitions for peripheral CORE_CONTROLLER_0 */
+#define XPAR_CORE_CONTROLLER_0_S_AXI_BASEADDR 0x43C00000
+#define XPAR_CORE_CONTROLLER_0_S_AXI_HIGHADDR 0x43C0FFFF
+
+
 /* Peripheral Definitions for peripheral PS7_AFI_0 */
 #define XPAR_PS7_AFI_0_S_AXI_BASEADDR 0xF8008000
 #define XPAR_PS7_AFI_0_S_AXI_HIGHADDR 0xF8008FFF
@@ -219,6 +224,8 @@
 
 
 /******************************************************************/
+
+
 
 
 
