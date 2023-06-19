@@ -1900,7 +1900,7 @@
           "axi_interconnect_1/ACLK",
           "axi_interconnect_1/S00_ACLK",
           "axi_interconnect_1/M00_ACLK",
-          "core_controller_0/s_axi_aclk",
+          "core_controller_0/S_AXI_ACLK",
           "clangpu_0/ACLK"
         ]
       },
@@ -1926,7 +1926,7 @@
           "axi_interconnect_1/ARESETN",
           "axi_interconnect_1/S00_ARESETN",
           "axi_interconnect_1/M00_ARESETN",
-          "core_controller_0/s_axi_aresetn",
+          "core_controller_0/S_AXI_ARSTN",
           "clangpu_0/ARESETN"
         ]
       }

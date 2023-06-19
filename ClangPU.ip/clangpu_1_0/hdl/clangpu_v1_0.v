@@ -122,6 +122,17 @@ module core #
     // Rチャネル
     assign M_AXI_RREADY  = 1'b0;    // *
 
-    assign CSTAT = 1'b1;
+    // assign CSTAT = 1'b1;
+
+    reg stat;
+
+    assign CSTAT = stat;
+
+    always @(posedge CCLK) begin
+        if (CRST)
+            stat <= 1'b0;
+        else if (CEXEC)
+            stat <= 1'b1;
+    end
 
 endmodule
