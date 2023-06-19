@@ -24,3 +24,8 @@ platform clean
 platform generate
 platform config -updatehw {C:/Users/YNakagami/Develop/projects/mitou2023/ClangPU/design_1_wrapper.xsa}
 platform generate -domains 
+platform active {design_1_wrapper}
+platform config -updatehw {C:/Users/YNakagami/Develop/projects/mitou2023/ClangPU/design_1_wrapper.xsa}
+platform generate -domains 
+platform config -updatehw {C:/Users/YNakagami/Develop/projects/mitou2023/ClangPU/design_1_wrapper.xsa}
+platform generate -domains 

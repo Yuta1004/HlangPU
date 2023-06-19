@@ -23,8 +23,8 @@
           "auto_pc": ""
         }
       },
-      "clangpu_0": "",
-      "core_controller_0": ""
+      "core_controller_0": "",
+      "clangpu_0": ""
     },
     "interface_ports": {
       "DDR": {
@@ -1792,17 +1792,37 @@
           }
         }
       },
-      "clangpu_0": {
-        "vlnv": "xilinx.com:user:clangpu:1.0",
-        "xci_name": "design_1_clangpu_0_0",
-        "xci_path": "ip\\design_1_clangpu_0_0\\design_1_clangpu_0_0.xci",
-        "inst_hier_path": "clangpu_0"
-      },
       "core_controller_0": {
         "vlnv": "xilinx.com:user:core_controller:1.0",
         "xci_name": "design_1_core_controller_0_0",
         "xci_path": "ip\\design_1_core_controller_0_0\\design_1_core_controller_0_0.xci",
         "inst_hier_path": "core_controller_0"
+      },
+      "clangpu_0": {
+        "vlnv": "xilinx.com:user:clangpu:1.0",
+        "xci_name": "design_1_clangpu_0_0",
+        "xci_path": "ip\\design_1_clangpu_0_0\\design_1_clangpu_0_0.xci",
+        "inst_hier_path": "clangpu_0",
+        "interface_ports": {
+          "INST_AXI": {
+            "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
+            "mode": "Master",
+            "address_space_ref": "INST_AXI",
+            "base_address": {
+              "minimum": "0x00000000",
+              "maximum": "0xFFFFFFFF",
+              "width": "32"
+            }
+          }
+        },
+        "addressing": {
+          "address_spaces": {
+            "INST_AXI": {
+              "range": "4G",
+              "width": "32"
+            }
+          }
+        }
       }
     },
     "interface_nets": {
@@ -1846,8 +1866,20 @@
     "nets": {
       "clangpu_0_STAT": {
         "ports": [
-          "clangpu_0/STAT",
+          "clangpu_0/CSTAT",
           "core_controller_0/CSTAT"
+        ]
+      },
+      "core_controller_0_CEXEC": {
+        "ports": [
+          "core_controller_0/CEXEC",
+          "clangpu_0/CEXEC"
+        ]
+      },
+      "core_controller_0_CMEM_ADDR": {
+        "ports": [
+          "core_controller_0/CMEM_ADDR",
+          "clangpu_0/CMEM_ADDR"
         ]
       },
       "core_controller_0_CRST": {
@@ -1868,15 +1900,15 @@
           "axi_interconnect_1/ACLK",
           "axi_interconnect_1/S00_ACLK",
           "axi_interconnect_1/M00_ACLK",
-          "clangpu_0/ACLK",
-          "core_controller_0/s_axi_aclk"
+          "core_controller_0/s_axi_aclk",
+          "clangpu_0/ACLK"
         ]
       },
       "processing_system7_0_FCLK_CLK2": {
         "ports": [
           "processing_system7_0/FCLK_CLK2",
-          "clangpu_0/CCLK",
-          "core_controller_0/CCLK"
+          "core_controller_0/CCLK",
+          "clangpu_0/CCLK"
         ]
       },
       "processing_system7_0_FCLK_RESET0_N": {
@@ -1894,8 +1926,8 @@
           "axi_interconnect_1/ARESETN",
           "axi_interconnect_1/S00_ARESETN",
           "axi_interconnect_1/M00_ARESETN",
-          "clangpu_0/ARESETN",
-          "core_controller_0/s_axi_aresetn"
+          "core_controller_0/s_axi_aresetn",
+          "clangpu_0/ARESETN"
         ]
       }
     },
@@ -1910,6 +1942,19 @@
                 "range": "64K",
                 "offset_base_param": "C_S_AXI_BASEADDR",
                 "offset_high_param": "C_S_AXI_HIGHADDR"
+              }
+            }
+          }
+        }
+      },
+      "/clangpu_0": {
+        "address_spaces": {
+          "INST_AXI": {
+            "segments": {
+              "SEG_processing_system7_0_HP0_DDR_LOWOCM": {
+                "address_block": "/processing_system7_0/S_AXI_HP0/HP0_DDR_LOWOCM",
+                "offset": "0x00000000",
+                "range": "1G"
               }
             }
           }

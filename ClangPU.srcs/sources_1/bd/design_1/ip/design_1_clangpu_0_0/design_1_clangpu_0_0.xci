@@ -4,7 +4,7 @@
     "xci_name": "design_1_clangpu_0_0",
     "cell_name": "clangpu_0",
     "component_reference": "xilinx.com:user:clangpu:1.0",
-    "ip_revision": "8",
+    "ip_revision": "10",
     "gen_directory": "../../../../../../ClangPU.gen/sources_1/bd/design_1/ip/design_1_clangpu_0_0",
     "parameters": {
       "component_parameters": {
@@ -49,7 +49,7 @@
       },
       "runtime_parameters": {
         "IPCONTEXT": [ { "value": "IP_Integrator" } ],
-        "IPREVISION": [ { "value": "8" } ],
+        "IPREVISION": [ { "value": "10" } ],
         "MANAGED": [ { "value": "TRUE" } ],
         "OUTPUTDIR": [ { "value": "../../../../../../ClangPU.gen/sources_1/bd/design_1/ip/design_1_clangpu_0_0" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
@@ -106,13 +106,16 @@
         "M_AXI_RREADY": [ { "direction": "out" } ],
         "CCLK": [ { "direction": "in" } ],
         "CRST": [ { "direction": "in" } ],
-        "STAT": [ { "direction": "out", "size_left": "7", "size_right": "0" } ]
+        "CEXEC": [ { "direction": "in" } ],
+        "CMEM_ADDR": [ { "direction": "in", "size_left": "31", "size_right": "0" } ],
+        "CSTAT": [ { "direction": "out" } ]
       },
       "interfaces": {
         "INST_AXI": {
           "vlnv": "xilinx.com:interface:aximm:1.0",
           "abstraction_type": "xilinx.com:interface:aximm_rtl:1.0",
           "mode": "master",
+          "address_space_ref": "INST_AXI",
           "parameters": {
             "DATA_WIDTH": [ { "value": "32", "value_src": "auto", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_ips_inferred": true, "is_static_object": false } ],
             "PROTOCOL": [ { "value": "AXI4", "value_src": "constant", "value_permission": "bd", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ],
@@ -220,6 +223,13 @@
           "port_maps": {
             "RST": [ { "physical_name": "ARESETN" } ]
           }
+        }
+      },
+      "address_spaces": {
+        "INST_AXI": {
+          "range": "0x100000000",
+          "display_name": "INST_AXI",
+          "width": "32"
         }
       }
     }

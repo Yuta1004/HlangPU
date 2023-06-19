@@ -4,7 +4,7 @@
     "xci_name": "design_1_core_controller_0_0",
     "cell_name": "core_controller_0",
     "component_reference": "xilinx.com:user:core_controller:1.0",
-    "ip_revision": "16",
+    "ip_revision": "17",
     "gen_directory": "../../../../../../ClangPU.gen/sources_1/bd/design_1/ip/design_1_core_controller_0_0",
     "parameters": {
       "component_parameters": {
@@ -35,7 +35,7 @@
       },
       "runtime_parameters": {
         "IPCONTEXT": [ { "value": "IP_Integrator" } ],
-        "IPREVISION": [ { "value": "16" } ],
+        "IPREVISION": [ { "value": "17" } ],
         "MANAGED": [ { "value": "TRUE" } ],
         "OUTPUTDIR": [ { "value": "../../../../../../ClangPU.gen/sources_1/bd/design_1/ip/design_1_core_controller_0_0" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
@@ -47,8 +47,10 @@
     "boundary": {
       "ports": {
         "CCLK": [ { "direction": "in" } ],
-        "CSTAT": [ { "direction": "in", "size_left": "7", "size_right": "0" } ],
         "CRST": [ { "direction": "out" } ],
+        "CEXEC": [ { "direction": "out" } ],
+        "CMEM_ADDR": [ { "direction": "out", "size_left": "31", "size_right": "0" } ],
+        "CSTAT": [ { "direction": "in", "size_left": "7", "size_right": "0" } ],
         "s_axi_aclk": [ { "direction": "in" } ],
         "s_axi_aresetn": [ { "direction": "in" } ],
         "s_axi_awaddr": [ { "direction": "in", "size_left": "15", "size_right": "0" } ],

@@ -6,8 +6,10 @@ module core_controller_v1_0_S_AXI #
     (
         // COREとの接続ポート
         input wire          CCLK,
-        input wire [7:0]    CSTAT,
-        output reg          CRST,
+        output wire         CRST,
+        output wire         CEXEC,
+        output wire [31:0]  CMEM_ADDR,
+        input wire          CSTAT,
 
         // Global Clock Signal
         input wire  S_AXI_ACLK,
@@ -94,7 +96,7 @@ module core_controller_v1_0_S_AXI #
     //-- Signals for user logic register space example
     //------------------------------------------------
     //-- Number of Slave Registers 4
-    reg [C_S_AXI_DATA_WIDTH-1:0]    slv_reg0;
+    reg [C_S_AXI_DATA_WIDTH-1:0]    slv_reg0, slv_reg1, slv_reg2;
     wire    slv_reg_rden;
     wire    slv_reg_wren;
     reg [C_S_AXI_DATA_WIDTH-1:0]    reg_data_out;
@@ -206,15 +208,16 @@ module core_controller_v1_0_S_AXI #
     always @(posedge S_AXI_ACLK) begin
         if (S_AXI_ARESETN == 1'b0) begin
             slv_reg0 <= 32'b0;
+            slv_reg1 <= 32'b0;
+            slv_reg2 <= 32'b0;
         end
         else begin
             if (slv_reg_wren) begin
                 case (axi_awaddr)
                     16'h0000:   slv_reg0 <= S_AXI_WDATA;
+                    16'h0004:   slv_reg1 <= S_AXI_WDATA;
+                    16'h0008:   slv_reg2 <= S_AXI_WDATA;
                 endcase
-            end
-            else begin
-                slv_reg0 <= slv_reg0;
             end
         end
     end
@@ -313,26 +316,25 @@ module core_controller_v1_0_S_AXI #
         end
     end
 
-    // 入力信号の同期化
-    reg [7:0]   cstat [0:1];
+    /* ----- CSTAT ----- */
+    reg cache_cstat [0:1];
 
     always @ (posedge S_AXI_ACLK) begin
-        cstat[0] <= CSTAT;
-        cstat[1] <= cstat[0];
+        cache_cstat[1] <= cache_cstat[0]; cache_cstat[0] <= CSTAT;
     end
 
     // Implement memory mapped register select and read logic generation
     // Slave register read enable is asserted when valid address is available
     // and the slave is ready to accept the read address.
-    assign slv_reg_rden = axi_arready & S_AXI_ARVALID & ~axi_rvalid;
     always @* begin
         case (axi_araddr)
-            16'h0004    : reg_data_out <= { {24{1'b0}}, cstat[1] };
+            16'h000C    : reg_data_out <= { {31{1'b0}}, cache_cstat[1] };
             default     : reg_data_out <= 0;
         endcase
     end
 
     // Output register or memory read data
+    assign slv_reg_rden = axi_arready & S_AXI_ARVALID & ~axi_rvalid;
     always @( posedge S_AXI_ACLK )
     begin
       if ( S_AXI_ARESETN == 1'b0 )
@@ -351,21 +353,26 @@ module core_controller_v1_0_S_AXI #
         end
     end
 
-    /* ----- CRST ----- */
-    reg cache_slv_reg0;
+    /* ----- CRST, CEXEC, CMEM_ADDR ----- */
+    reg         cache_slv_reg0 [0:1];
+    reg         cache_slv_reg1 [0:1];
+    reg [31:0]  cache_slv_reg2 [0:1];
 
-    always @ (posedge S_AXI_ACLK) begin
-        if (S_AXI_ARESETN == 1'b0)
-            cache_slv_reg0 <= 1'b0;
-        else if (slv_reg0 > 32'b0)
-            cache_slv_reg0 <= 1'b1;
-    end
+    assign CRST         = cache_slv_reg0[1];
+    assign CEXEC        = cache_slv_reg1[1];
+    assign CMEM_ADDR    = cache_slv_reg2[1];
 
-    always @ (posedge cache_slv_reg0, posedge CCLK) begin
-        if (cache_slv_reg0)
-            CRST <= 1'b1;
-        else
-            CRST <= 1'b0;
+    always @ (posedge CCLK) begin
+        if (S_AXI_ARESETN == 1'b0) begin
+            cache_slv_reg0[0] <= 1'b0;  cache_slv_reg0[1] <= 1'b0;
+            cache_slv_reg1[0] <= 1'b0;  cache_slv_reg1[1] <= 1'b0;
+            cache_slv_reg2[0] <= 32'b0; cache_slv_reg2[1] <= 32'b0;
+        end
+        else begin
+            cache_slv_reg0[1] <= cache_slv_reg0[0]; cache_slv_reg0[0] <= slv_reg0 > 32'b0;
+            cache_slv_reg1[1] <= cache_slv_reg1[0]; cache_slv_reg1[0] <= slv_reg1 > 32'b0;
+            cache_slv_reg2[1] <= cache_slv_reg2[0]; cache_slv_reg2[0] <= slv_reg2;
+        end
     end
 
 endmodule

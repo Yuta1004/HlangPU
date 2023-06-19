@@ -72,12 +72,14 @@ module core #
         input  wire                                 M_AXI_RVALID,
         output wire                                 M_AXI_RREADY,
 
-        // CPUクロ??ク
+        // CPU制御
         input wire          CCLK,
         input wire          CRST,
+        input wire          CEXEC,
+        input wire  [31:0]  CMEM_ADDR,
 
         // CPU状態
-        output wire [7:0]   STAT
+        output wire         CSTAT
     );
 
     /* ----- AXIバス設定 ----- */
@@ -120,6 +122,6 @@ module core #
     // Rチャネル
     assign M_AXI_RREADY  = 1'b0;    // *
 
-    assign STAT = 8'd124;
+    assign CSTAT = 1'b1;
 
 endmodule

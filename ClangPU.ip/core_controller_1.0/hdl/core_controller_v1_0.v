@@ -6,8 +6,10 @@ module core_controller_v1_0 #
     (
         // COREとの接続ポート
         input wire          CCLK,
-        input wire [7:0]    CSTAT,
         output wire         CRST,
+        output wire         CEXEC,
+        output wire [31:0]  CMEM_ADDR,
+        input wire          CSTAT,
 
         input wire  s_axi_aclk,
         input wire  s_axi_aresetn,
@@ -38,6 +40,8 @@ module core_controller_v1_0 #
     ) core_controller_v1_0_S_AXI_inst (
         .CCLK(CCLK),
         .CRST(CRST),
+        .CEXEC(CEXEC),
+        .CMEM_ADDR(CMEM_ADDR),
         .CSTAT(CSTAT),
         .S_AXI_ACLK(s_axi_aclk),
         .S_AXI_ARESETN(s_axi_aresetn),

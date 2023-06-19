@@ -10,7 +10,9 @@
       <spirit:displayName>INST_AXI</spirit:displayName>
       <spirit:busType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="aximm" spirit:version="1.0"/>
       <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="aximm_rtl" spirit:version="1.0"/>
-      <spirit:master/>
+      <spirit:master>
+        <spirit:addressSpaceRef spirit:addressSpaceRef="INST_AXI"/>
+      </spirit:master>
       <spirit:portMaps>
         <spirit:portMap>
           <spirit:logicalPort>
@@ -399,6 +401,14 @@
       </spirit:parameters>
     </spirit:busInterface>
   </spirit:busInterfaces>
+  <spirit:addressSpaces>
+    <spirit:addressSpace>
+      <spirit:name>INST_AXI</spirit:name>
+      <spirit:displayName>INST_AXI</spirit:displayName>
+      <spirit:range spirit:format="bitString" spirit:resolve="dependent" spirit:dependency="pow(2,(spirit:decode(id(&apos;MODELPARAM_VALUE.C_M_AXI_ADDR_WIDTH&apos;)) - 1) - 0 + 1)" spirit:bitStringLength="33" spirit:minimum="4096" spirit:rangeType="long">0x100000000</spirit:range>
+      <spirit:width spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_M_AXI_DATA_WIDTH&apos;)) - 1) - 0 + 1">32</spirit:width>
+    </spirit:addressSpace>
+  </spirit:addressSpaces>
   <spirit:model>
     <spirit:views>
       <spirit:view>
@@ -413,7 +423,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>95cfac98</spirit:value>
+            <spirit:value>f4d4d978</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -429,7 +439,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>95cfac98</spirit:value>
+            <spirit:value>f4d4d978</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1182,13 +1192,39 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>STAT</spirit:name>
+        <spirit:name>CEXEC</spirit:name>
         <spirit:wire>
-          <spirit:direction>out</spirit:direction>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>CMEM_ADDR</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
           <spirit:vector>
-            <spirit:left spirit:format="long">7</spirit:left>
+            <spirit:left spirit:format="long">31</spirit:left>
             <spirit:right spirit:format="long">0</spirit:right>
           </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_verilogsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_verilogbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>CSTAT</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
           <spirit:wireTypeDefs>
             <spirit:wireTypeDef>
               <spirit:typeName>wire</spirit:typeName>
@@ -1265,7 +1301,7 @@
       <spirit:file>
         <spirit:name>hdl/clangpu_v1_0.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_95cfac98</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_f4d4d978</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -1358,14 +1394,15 @@
         <xilinx:taxonomy>AXI_Peripheral</xilinx:taxonomy>
       </xilinx:taxonomies>
       <xilinx:displayName>clangpu_v1.0</xilinx:displayName>
-      <xilinx:coreRevision>8</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2023-06-17T10:27:05Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>10</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2023-06-19T05:52:48Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2022.2</xilinx:xilinxVersion>
-      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="abdc2441"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="95af6ff4"/>
-      <xilinx:checksum xilinx:scope="ports" xilinx:value="dc761f16"/>
+      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="ad99838b"/>
+      <xilinx:checksum xilinx:scope="addressSpaces" xilinx:value="579e50e2"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="63a12f36"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="2a5125e3"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="332e4ade"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="00712396"/>
     </xilinx:packagingInfo>
