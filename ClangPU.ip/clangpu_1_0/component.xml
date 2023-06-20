@@ -423,7 +423,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>f4d4d978</spirit:value>
+            <spirit:value>8f8f6b81</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -439,7 +439,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>f4d4d978</spirit:value>
+            <spirit:value>8f8f6b81</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -453,7 +453,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>89c1140e</spirit:value>
+            <spirit:value>7c4c47cf</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -467,7 +467,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>16328387</spirit:value>
+            <spirit:value>45a2f450</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1301,7 +1301,7 @@
       <spirit:file>
         <spirit:name>hdl/clangpu_v1_0.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_f4d4d978</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_8f8f6b81</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -1394,14 +1394,14 @@
         <xilinx:taxonomy>AXI_Peripheral</xilinx:taxonomy>
       </xilinx:taxonomies>
       <xilinx:displayName>clangpu_v1.0</xilinx:displayName>
-      <xilinx:coreRevision>10</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2023-06-19T05:52:48Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>11</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2023-06-20T08:59:48Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2022.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="ad99838b"/>
       <xilinx:checksum xilinx:scope="addressSpaces" xilinx:value="579e50e2"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="63a12f36"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="5f8050ca"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="2a5125e3"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="332e4ade"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="00712396"/>
