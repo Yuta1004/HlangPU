@@ -67,10 +67,14 @@ module lexer
     end
 
     /* ----- 2. 文字列比較 ----- */
-    parameter NUM       = 8'd0;
-    parameter CHAR      = 8'd1;
-    parameter FOR       = 8'd2;
-    parameter WHILE     = 8'd3;
+    parameter NUM       = 8'h00;
+    parameter PLUS      = 8'h01;
+    parameter MINUS     = 8'h02;
+    parameter EQUAL     = 8'h03;
+    parameter SEMICOLON = 8'h04;
+    parameter VARNAME   = 8'h05;
+    parameter CHAR      = 8'h80;
+    parameter RETURN    = 8'h81;
 
     assign O_VALID = O_DATA != 16'b0;
 
@@ -79,10 +83,16 @@ module lexer
             O_DATA <= 16'b0;
         else if (str_64 != 64'b0 && O_DATA == 16'b0)
             casex (str_64)
-                64'hxx_xx_xx_xx_63_68_61_72: O_DATA <= { CHAR, 8'b0 };      // "char"
-                64'hxx_xx_xx_xx_xx_66_6f_72: O_DATA <= { FOR, 8'b0 };       // "for"
-                64'hxx_xx_xx_77_68_69_6c_65: O_DATA <= { WHILE, 8'b0 };     // "while"
-                default:                     O_DATA <= { NUM, num_8[1] };   // Unknown Tag or NUM
+                64'hxx_xx_72_65_74_75_72_6e: O_DATA <= { RETURN, 8'b0 };            // "return"
+                64'hxx_xx_xx_xx_63_68_61_72: O_DATA <= { CHAR, 8'b0 };              // "char"
+                64'hxx_xx_xx_xx_xx_xx_xx_2b: O_DATA <= { PLUS, 8'b0 };              // '+'
+                64'hxx_xx_xx_xx_xx_xx_xx_2d: O_DATA <= { MINUS, 8'b0 };             // '+'
+                64'hxx_xx_xx_xx_xx_xx_xx_3d: O_DATA <= { EQUAL, 8'b0 };             // '='
+                64'hxx_xx_xx_xx_xx_xx_xx_3b: O_DATA <= { SEMICOLON, 8'b0 };         // ';'
+                64'hxx_xx_xx_xx_xx_xx_xx_6x: O_DATA <= { VARNAME, str_64[7:0] };    // VARNAME
+                64'hxx_xx_xx_xx_xx_xx_xx_7x: O_DATA <= { VARNAME, str_64[7:0] };    // VARNAME
+                
+                default:                     O_DATA <= { NUM, num_8[1] };           // Unknown Tag or NUM
             endcase
         else
             O_DATA <= 16'b0;
