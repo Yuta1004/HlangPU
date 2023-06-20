@@ -107,9 +107,13 @@ module core #
     /* ----- フェッチ部 ----- */
     wire        mem_wait, fetch_o_valid;
     wire [31:0] fetch_o_data;
-    wire [11:0] ffifo_wr_data_count;
     reg         fetch_i_valid;
     reg  [31:0] fetch_i_addr;
+
+    wire        ffifo_o_empty, ffifo_o_valid, lexer_o_valid;
+    wire [11:0] ffifo_wr_data_count;
+    wire [7:0]  ffifo_o_data;
+    reg         ffifo_o_en;
 
     always @ (posedge CCLK) begin
         if (CRST) begin
@@ -179,10 +183,11 @@ module core #
     );
 
     /* ----- レキサ ----- */
-    wire        ffifo_o_empty, ffifo_o_valid, lexer_o_valid;
-    wire [7:0]  ffifo_o_data;
     wire [15:0] lexer_o_data;
-    reg         ffifo_o_en;
+
+    wire        lfifo_o_valid, lfifo_o_empty;
+    wire [15:0] lfifo_o_data;
+    reg         lfifo_o_en;
 
     always @ (posedge CCLK) begin
         if (CRST)
@@ -219,10 +224,6 @@ module core #
     );
 
     /* ----- パーサ ----- */
-    wire        lfifo_o_valid, lfifo_o_empty;
-    wire [15:0] lfifo_o_data;
-    reg         lfifo_o_en;
-
     always @ (posedge CCLK) begin
         if (CRST)
             lfifo_o_en <= 1'b0;
