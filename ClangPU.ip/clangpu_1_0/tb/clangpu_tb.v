@@ -37,15 +37,17 @@ wire [7:0]      LEX_CHAR    = core.ffifo_o_data;
 
 /* ----- 命令書き込み ----- */
 task write_inst;
-integer i, num;
+reg [8:0] c;
+integer fd, i, num;
 begin
-    num = 32'd0;
-    for (i = 32'd0; i < 32'd4096; i = i + 32'd1) begin
-        axi_slave_bfm_inst.ram_array[i][7:0]   =  num    % 256;
-        axi_slave_bfm_inst.ram_array[i][15:8]  = (num+1) % 256;
-        axi_slave_bfm_inst.ram_array[i][23:16] = (num+2) % 256;
-        axi_slave_bfm_inst.ram_array[i][31:24] = (num+3) % 256;
-        num = num + 32'd4;
+    i = 0;
+    fd = $fopen("../../../../../../ClangPU.ip/clangpu_1_0/tb/test.c", "rb");
+    while ($feof(fd) == 0) begin
+        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][7:0]   = c[7:0];
+        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][15:8]  = c[7:0];
+        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][23:16] = c[7:0];
+        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][31:24] = c[7:0];
+        i = i + 1;
     end
 end 
 endtask
