@@ -32,6 +32,7 @@
 #Source files:
 #########
 !*.vhd
+!*.vh
 !*.v
 !*.bd
 !*.edif
