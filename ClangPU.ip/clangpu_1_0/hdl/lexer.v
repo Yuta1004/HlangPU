@@ -7,7 +7,7 @@ module lexer
         /* ----- 入出力 ----- */
         input wire          I_VALID,
         input wire  [7:0]   I_DATA,
-        output wire         O_VALID,
+        output reg          O_VALID,
         output reg  [15:0]  O_DATA
     );
 
@@ -76,26 +76,31 @@ module lexer
     parameter CHAR      = 8'h80;
     parameter RETURN    = 8'h81;
 
-    assign O_VALID = O_DATA != 16'b0;
+    reg [63:0] o_data_ready;
+
+    always @* begin
+        casex (str_64)
+            64'hxx_xx_72_65_74_75_72_6e: o_data_ready <= { RETURN, 8'b0 };          // "return"
+            64'hxx_xx_xx_xx_63_68_61_72: o_data_ready <= { CHAR, 8'b0 };            // "char"
+            64'hxx_xx_xx_xx_xx_xx_xx_2b: o_data_ready <= { PLUS, 8'b0 };            // '+'
+            64'hxx_xx_xx_xx_xx_xx_xx_2d: o_data_ready <= { MINUS, 8'b0 };           // '+'
+            64'hxx_xx_xx_xx_xx_xx_xx_3d: o_data_ready <= { EQUAL, 8'b0 };           // '='
+            64'hxx_xx_xx_xx_xx_xx_xx_3b: o_data_ready <= { SEMICOLON, 8'b0 };       // ';'
+            64'hxx_xx_xx_xx_xx_xx_xx_6x: o_data_ready <= { VARNAME, str_64[7:0] };  // VARNAME
+            64'hxx_xx_xx_xx_xx_xx_xx_7x: o_data_ready <= { VARNAME, str_64[7:0] };  // VARNAME
+            default:                     o_data_ready <= { NUM, num_8[1] };         // Unknown Tag or NUM
+        endcase
+    end
 
     always @ (posedge CLK) begin
-        if (RST)
-            O_DATA <= 16'b0;
-        else if (str_64 != 64'b0 && O_DATA == 16'b0)
-            casex (str_64)
-                64'hxx_xx_72_65_74_75_72_6e: O_DATA <= { RETURN, 8'b0 };            // "return"
-                64'hxx_xx_xx_xx_63_68_61_72: O_DATA <= { CHAR, 8'b0 };              // "char"
-                64'hxx_xx_xx_xx_xx_xx_xx_2b: O_DATA <= { PLUS, 8'b0 };              // '+'
-                64'hxx_xx_xx_xx_xx_xx_xx_2d: O_DATA <= { MINUS, 8'b0 };             // '+'
-                64'hxx_xx_xx_xx_xx_xx_xx_3d: O_DATA <= { EQUAL, 8'b0 };             // '='
-                64'hxx_xx_xx_xx_xx_xx_xx_3b: O_DATA <= { SEMICOLON, 8'b0 };         // ';'
-                64'hxx_xx_xx_xx_xx_xx_xx_6x: O_DATA <= { VARNAME, str_64[7:0] };    // VARNAME
-                64'hxx_xx_xx_xx_xx_xx_xx_7x: O_DATA <= { VARNAME, str_64[7:0] };    // VARNAME
-                
-                default:                     O_DATA <= { NUM, num_8[1] };           // Unknown Tag or NUM
-            endcase
-        else
-            O_DATA <= 16'b0;
+        if (RST) begin
+            O_VALID <= 1'b0;
+            O_DATA <= 64'b0;
+        end
+        else begin
+            O_VALID <= (o_data_ready != 64'b0) && (o_data_ready != O_DATA);
+            O_DATA <= o_data_ready;
+        end
     end
     
 endmodule
