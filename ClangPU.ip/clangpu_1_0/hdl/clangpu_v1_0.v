@@ -106,13 +106,17 @@ module core #
 
     /* ----- フェッチ部 ----- */
     wire        mem_wait, fetch_o_valid;
-    wire [31:0] fetch_o_addr, fetch_o_data;
+    wire [31:0] fetch_o_data;
+    wire [11:0] ffifo_wr_data_count;
     reg         fetch_i_valid;
     reg  [31:0] fetch_i_addr;
 
     always @ (posedge CCLK) begin
         if (CRST) begin
             fetch_i_addr <= 32'hffff_fffc;
+            fetch_i_valid <= 1'b0;
+        end
+        else if (ffifo_wr_data_count >= 1024) begin
             fetch_i_valid <= 1'b0;
         end
         else if (CEXEC && !mem_wait) begin
@@ -132,7 +136,7 @@ module core #
         // 入出力 
         .I_ADDR     (fetch_i_addr),
         .I_VALID    (fetch_i_valid),
-        .O_ADDR     (fetch_o_addr),
+        // .O_ADDR  (),
         .O_VALID    (fetch_o_valid),
         .O_DATA     (fetch_o_data),
 
@@ -157,5 +161,33 @@ module core #
         .M_AXI_RVALID   (M_AXI_RVALID),
         .M_AXI_RREADY   (M_AXI_RREADY)
     );
+
+    fifo_32in_8out_2048 ffifo (
+        // クロック&リセット
+        .clk    (CCLK),
+        .srst   (CRST),
+
+        // 入出力
+        // .full        (),
+        .din            (fetch_o_data),
+        .wr_en          (fetch_o_valid),
+        .wr_data_count  (ffifo_wr_data_count),
+        .dout           (ffifo_o_data),
+        .rd_en          (ffifo_o_en),
+        .empty          (ffifo_o_empty),
+        .valid          (ffifo_o_valid)
+    );
+
+    /* ----- レキサ ----- */
+    wire        ffifo_o_empty, ffifo_o_valid;
+    wire [7:0]  ffifo_o_data;
+    reg         ffifo_o_en;
+
+    always @ (posedge CCLK) begin
+        if (CRST)
+            ffifo_o_en <= 1'b0;
+        else
+            ffifo_o_en <= !ffifo_o_empty;
+    end
 
 endmodule

@@ -32,6 +32,9 @@ wire            O_VALID     = core.fetch.O_VALID;
 wire [31:0]     O_DATA      = core.fetch.O_DATA;
 wire            MEM_WAIT    = core.fetch.MEM_WAIT;
 
+wire            LEX_VALID   = core.ffifo_o_valid;
+wire [7:0]      LEX_CHAR    = core.ffifo_o_data;
+
 /* ----- 命令書き込み ----- */
 task write_inst;
 integer i, num;
