@@ -101,22 +101,61 @@ module core #
     // Bチャネル
     assign M_AXI_BREADY = 1'b0;     // *
 
-    // ARチャネル
-    assign M_AXI_ARID    = 'b0;
-    assign M_AXI_ARADDR  = 32'b0;   // *
-    assign M_AXI_ARLEN   = 8'b0;    // *
-    assign M_AXI_ARSIZE  = 3'b010;
-    assign M_AXI_ARBURST = 2'b01;
-    assign M_AXI_ARLOCK  = 1'b0;
-    assign M_AXI_ARCACHE = 4'b0011;
-    assign M_AXI_ARPROT  = 3'h0;
-    assign M_AXI_ARQOS   = 4'h0;
-    assign M_AXI_ARUSER  = 'b0;
-    assign M_AXI_ARVALID = 1'b0;    // *
-
-    // Rチャネル
-    assign M_AXI_RREADY  = 1'b0;    // *
-
+    /* ----- 状態 ----- */
     assign CSTAT = 1'b1;
+
+    /* ----- フェッチ部 ----- */
+    wire        mem_wait, fetch_o_valid;
+    wire [31:0] fetch_o_addr, fetch_o_data;
+    reg         fetch_i_valid;
+    reg  [31:0] fetch_i_addr;
+
+    always @ (posedge CCLK) begin
+        if (CRST) begin
+            fetch_i_addr <= 32'hffff_fffc;
+            fetch_i_valid <= 1'b0;
+        end
+        else if (CEXEC && !mem_wait) begin
+            fetch_i_addr <= fetch_i_addr + 32'd4;
+            fetch_i_valid <= 1'b1;
+        end
+    end
+
+    fetch fetch (
+        // クロック&リセット
+        .CLK        (CCLK),
+        .RST        (CRST),
+
+        // 制御
+        .MEM_WAIT   (mem_wait),
+
+        // 入出力 
+        .I_ADDR     (fetch_i_addr),
+        .I_VALID    (fetch_i_valid),
+        .O_ADDR     (fetch_o_addr),
+        .O_VALID    (fetch_o_valid),
+        .O_DATA     (fetch_o_data),
+
+        // AXIバス
+        .M_AXI_ARID     (M_AXI_ARID),
+        .M_AXI_ARADDR   (M_AXI_ARADDR),
+        .M_AXI_ARLEN    (M_AXI_ARLEN),
+        .M_AXI_ARSIZE   (M_AXI_ARSIZE),
+        .M_AXI_ARBURST  (M_AXI_ARBURST),
+        .M_AXI_ARLOCK   (M_AXI_ARLOCK),
+        .M_AXI_ARCACHE  (M_AXI_ARCACHE),
+        .M_AXI_ARPROT   (M_AXI_ARPROT),
+        .M_AXI_ARQOS    (M_AXI_ARQOS),
+        .M_AXI_ARUSER   (M_AXI_ARUSER),
+        .M_AXI_ARVALID  (M_AXI_ARVALID),
+        .M_AXI_ARREADY  (M_AXI_ARREADY),
+        .M_AXI_RID      (M_AXI_RID),
+        .M_AXI_RDATA    (M_AXI_RDATA),
+        .M_AXI_RRESP    (M_AXI_RRESP),
+        .M_AXI_RLAST    (M_AXI_RLAST),
+        .M_AXI_RUSER    (M_AXI_RUSER),
+        .M_AXI_RVALID   (M_AXI_RVALID),
+        .M_AXI_RREADY   (M_AXI_RREADY)
+    );
 
 endmodule

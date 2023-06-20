@@ -1,7 +1,9 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib  --include "../../../../../../ClangPU.ip/clangpu_1_0/tb" \
+"../../../../../../ClangPU.ip/clangpu_1_0/src/bram_4kb/sim/bram_4kb.v" \
 "../../../../../../ClangPU.ip/clangpu_1_0/tb/axi_slave_BFM.v" \
 "../../../../../../ClangPU.ip/clangpu_1_0/hdl/clangpu_v1_0.v" \
+"../../../../../../ClangPU.ip/clangpu_1_0/hdl/fetch.v" \
 "../../../../../../ClangPU.ip/clangpu_1_0/tb/sync_fifo.v" \
 "../../../../../../ClangPU.ip/clangpu_1_0/tb/clangpu_tb.v" \
 
