@@ -229,7 +229,7 @@
         "INST_AXI": {
           "range": "0x100000000",
           "display_name": "INST_AXI",
-          "width": "32"
+          "width": "1"
         }
       }
     }
