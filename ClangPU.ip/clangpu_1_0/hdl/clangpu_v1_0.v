@@ -200,7 +200,34 @@ module core #
         .I_VALID(ffifo_o_valid),
         .I_DATA (ffifo_o_data),
         .O_VALID(lexer_o_valid),
-        .O_DATA (lexer_o_data),
+        .O_DATA (lexer_o_data)
     );
+
+    fifo_16in_16out_1024 lfifo (
+        // クロック&リセット
+        .clk    (CCLK),
+        .srst   (CRST),
+
+        // 入出力
+        // .full        (),
+        .din            (lexer_o_data),
+        .wr_en          (lexer_o_valid),
+        .dout           (lfifo_o_data),
+        .rd_en          (lfifo_o_en),
+        .empty          (lfifo_o_empty),
+        .valid          (lfifo_o_valid)
+    );
+
+    /* ----- パーサ ----- */
+    wire        lfifo_o_valid, lfifo_o_empty;
+    wire [15:0] lfifo_o_data;
+    reg         lfifo_o_en;
+
+    always @ (posedge CCLK) begin
+        if (CRST)
+            lfifo_o_en <= 1'b0;
+        else
+            lfifo_o_en <= !lfifo_o_empty;
+    end
 
 endmodule

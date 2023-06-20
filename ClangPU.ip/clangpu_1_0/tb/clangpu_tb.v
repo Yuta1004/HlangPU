@@ -38,6 +38,9 @@ wire            LEX_O_VALID = core.lexer.O_VALID;
 wire [15:0]     LEX_O_TOKEN = core.lexer.O_DATA;
 wire [63:0]     LEX_STR64   = core.lexer.str_64;
 
+wire            PARSER_I_VALID  = core.lfifo_o_valid;
+wire [15:0]     PARSER_I_TOKEN  = core.lfifo_o_data;
+
 /* ----- 命令書き込み ----- */
 task write_inst;
 reg [8:0] c;
