@@ -179,8 +179,9 @@ module core #
     );
 
     /* ----- レキサ ----- */
-    wire        ffifo_o_empty, ffifo_o_valid;
+    wire        ffifo_o_empty, ffifo_o_valid, lexer_o_valid;
     wire [7:0]  ffifo_o_data;
+    wire [15:0] lexer_o_data;
     reg         ffifo_o_en;
 
     always @ (posedge CCLK) begin
@@ -189,5 +190,17 @@ module core #
         else
             ffifo_o_en <= !ffifo_o_empty;
     end
+
+    lexer lexer (
+        // クロック&リセット
+        .CLK    (CCLK),
+        .RST    (CRST),
+
+        // 入出力
+        .I_VALID(ffifo_o_valid),
+        .I_DATA (ffifo_o_data),
+        .O_VALID(lexer_o_valid),
+        .O_DATA (lexer_o_data),
+    );
 
 endmodule
