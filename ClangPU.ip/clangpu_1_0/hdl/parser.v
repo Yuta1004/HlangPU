@@ -13,9 +13,9 @@ module parser
     );
 
     function [4:0] idx_8x4;
-        input [2:0] row;
-        input [1:0] col;
-        idx_8x4 = ({ 2'b0, row } << 2) + { 3'b0, col };
+        input [7:0] row;
+        input [7:0] col;
+        idx_8x4 = ({ 2'b0, row[2:0] } << 2) + { 3'b0, col[1:0] };
     endfunction
 
     /* ----- LR表 ----- */
@@ -28,8 +28,8 @@ module parser
     reg [7:0]   reduce_table [0:4*1-1]; // 4(Rules)
     reg [7:0]   goto_table   [0:8*4-1]; // 8(States) x 4(Rules)
 
-    wire [1:0]  action  = action_table[idx_8x4(top_data[2:0], I_TOKEN[9:8])][9:8];
-    wire [7:0]  avalue  = action_table[idx_8x4(top_data[2:0], I_TOKEN[9:8])][7:0];
+    wire [1:0]  action  = action_table[idx_8x4(top_data, I_TOKEN[15:8])][9:8];
+    wire [7:0]  avalue  = action_table[idx_8x4(top_data, I_TOKEN[15:8])][7:0];
 
     always @ (posedge CLK) begin
         if (RST) begin
@@ -123,8 +123,8 @@ module parser
     reg  [7:0]  push_data;
     wire [7:0]  top_data;
 
-    reg [7:0]   reduce_memo;
-    reg [7:0]   reduce_pop_nums;
+    reg  [7:0]  reduce_memo;
+    reg  [7:0]  reduce_pop_nums;
 
     always @ (posedge CLK) begin
         if (RST) begin
@@ -154,7 +154,7 @@ module parser
             else if (reduce_pop_nums == 8'b1) begin
                 pop_en <= 1'b0;
                 push_en <= 1'b1;
-                push_data <= goto_table[idx_8x4(top_data[2:0], reduce_memo[1:0])];
+                push_data <= goto_table[idx_8x4(top_data, reduce_memo)];
                 reduce_pop_nums <= reduce_pop_nums - 8'b1;
             end
             else if (reduce_pop_nums == 8'b0)
