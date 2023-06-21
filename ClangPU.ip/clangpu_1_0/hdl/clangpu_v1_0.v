@@ -224,11 +224,81 @@ module core #
     );
 
     /* ----- パーサ ----- */
+    parameter S_P_READY = 2'b00;
+    parameter S_P_FWAIT = 2'b01;
+    parameter S_P_PWAIT = 2'b11;
+
+    reg [1:0]   p_state, p_next_state;
+
+    wire        parser_receive;
+    reg         parser_i_valid;
+    reg [15:0]  parser_i_token;
+
+    always @ (posedge CCLK) begin
+        if (CRST)
+            p_state <= S_P_READY;
+        else
+            p_state <= p_next_state;
+    end
+
+    always @* begin
+        case (p_state)
+            S_P_READY:
+                if (!lfifo_o_empty)
+                    p_next_state <= S_P_FWAIT;
+                else
+                    p_next_state <= S_P_READY;
+
+            S_P_FWAIT:
+                if (lfifo_o_valid)
+                    p_next_state <= S_P_PWAIT;
+                else
+                    p_next_state <= S_P_FWAIT;
+            
+            S_P_PWAIT:
+                if (parser_receive)
+                    p_next_state <= S_P_READY;
+                else
+                    p_next_state <= S_P_PWAIT;
+            
+            default:
+                p_next_state <= S_P_READY;
+        endcase
+    end
+
     always @ (posedge CCLK) begin
         if (CRST)
             lfifo_o_en <= 1'b0;
-        else
-            lfifo_o_en <= !lfifo_o_empty;
+        else if (p_state == S_P_READY && p_next_state == S_P_FWAIT)
+            lfifo_o_en <= 1'b1;
+        else if (p_state == S_P_FWAIT)
+            lfifo_o_en <= 1'b0;
     end
+
+    always @ (posedge CCLK) begin
+        if (CRST) begin
+            parser_i_valid <= 1'b0;
+            parser_i_token <= 16'b0;
+        end
+        else if (p_state == S_P_FWAIT && p_next_state == S_P_PWAIT) begin
+            parser_i_valid <= 1'b1;
+            parser_i_token <= lfifo_o_data;
+        end
+        else if (p_state == S_P_PWAIT && p_next_state == S_P_READY)
+            parser_i_valid <= 1'b0;
+    end
+
+    parser parser (
+        // クロック&リセット
+        .CLK    (CCLK),
+        .RST    (CRST),
+
+        // 制御
+        .RECEIVE(parser_receive),
+        
+        // 入出力
+        .I_VALID(parser_i_valid),
+        .I_TOKEN(parser_i_token)
+    );
 
 endmodule

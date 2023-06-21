@@ -70,24 +70,15 @@ module lexer
     parameter NUM       = 8'h00;
     parameter PLUS      = 8'h01;
     parameter MINUS     = 8'h02;
-    parameter EQUAL     = 8'h03;
-    parameter SEMICOLON = 8'h04;
-    parameter VARNAME   = 8'h05;
-    parameter CHAR      = 8'h80;
-    parameter RETURN    = 8'h81;
+    parameter SEMICOLON = 8'h03;
 
     reg [63:0] o_data_ready;
 
     always @* begin
         casex (str_64)
-            64'hxx_xx_72_65_74_75_72_6e: o_data_ready <= { RETURN, 8'b0 };          // "return"
-            64'hxx_xx_xx_xx_63_68_61_72: o_data_ready <= { CHAR, 8'b0 };            // "char"
             64'hxx_xx_xx_xx_xx_xx_xx_2b: o_data_ready <= { PLUS, 8'b0 };            // '+'
             64'hxx_xx_xx_xx_xx_xx_xx_2d: o_data_ready <= { MINUS, 8'b0 };           // '+'
-            64'hxx_xx_xx_xx_xx_xx_xx_3d: o_data_ready <= { EQUAL, 8'b0 };           // '='
             64'hxx_xx_xx_xx_xx_xx_xx_3b: o_data_ready <= { SEMICOLON, 8'b0 };       // ';'
-            64'hxx_xx_xx_xx_xx_xx_xx_6x: o_data_ready <= { VARNAME, str_64[7:0] };  // VARNAME
-            64'hxx_xx_xx_xx_xx_xx_xx_7x: o_data_ready <= { VARNAME, str_64[7:0] };  // VARNAME
             default:                     o_data_ready <= { NUM, num_8[1] };         // Unknown Tag or NUM
         endcase
     end
