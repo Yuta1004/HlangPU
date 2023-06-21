@@ -230,9 +230,10 @@ module core #
 
     reg [1:0]   p_state, p_next_state;
 
-    wire        parser_receive;
+    wire        parser_receive, parser_o_valid;
+    wire [15:0] parser_o_rule;
     reg         parser_i_valid;
-    reg [15:0]  parser_i_token;
+    reg  [15:0] parser_i_token;
 
     always @ (posedge CCLK) begin
         if (CRST)
@@ -298,7 +299,9 @@ module core #
         
         // 入出力
         .I_VALID(parser_i_valid),
-        .I_TOKEN(parser_i_token)
+        .I_TOKEN(parser_i_token),
+        .O_VALID(parser_o_valid),
+        .O_RULE (parser_o_rule)
     );
 
 endmodule

@@ -40,6 +40,8 @@ wire [63:0]     LEX_STR64   = core.lexer.str_64;
 
 wire            PARSER_I_VALID  = core.parser.I_VALID;
 wire [15:0]     PARSER_I_TOKEN  = core.parser.I_TOKEN;
+wire            PARSER_O_VALID  = core.parser.O_VALID;
+wire [15:0]     PARSER_O_RULE   = core.parser.O_RULE;
 wire            PARSER_RECEIVE  = core.parser.RECEIVE;
 wire [3:0]      PARSER_STATE    = core.parser.state;
 wire [1:0]      PARSER_ACTION   = core.parser.action;

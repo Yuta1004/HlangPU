@@ -9,7 +9,9 @@ module parser
 
         /* ----- 入出力 ----- */
         input wire          I_VALID,
-        input wire  [15:0]  I_TOKEN
+        input wire  [15:0]  I_TOKEN,
+        output reg          O_VALID,
+        output reg  [15:0]  O_RULE
     );
 
     function [4:0] idx_8x4;
@@ -108,7 +110,7 @@ module parser
         endcase
     end
 
-    /* ----- 入力受付通知 ----- */
+    /* ----- 制御&入出力信号 ----- */
     always @ (posedge CLK) begin
         if (RST)
             RECEIVE <= 1'b0;
@@ -116,6 +118,21 @@ module parser
             RECEIVE <= 1'b1;
         else 
             RECEIVE <= 1'b0;
+    end
+
+    always @ (posedge CLK) begin
+        if (RST) begin
+            O_VALID <= 1'b0;
+            O_RULE <= 16'b0;
+        end
+        else if (state == S_REDUCE && next_state == S_MOVE) begin
+            O_VALID <= 1'b1;
+            O_RULE <= reduce_memo;
+        end
+        else begin
+            O_VALID <= 1'b0;
+            O_RULE <= 1'b0;
+        end
     end
 
     /* ----- Shift & Reduce ----- */
