@@ -28,7 +28,6 @@ module lifo_8in_8out_1024
         if (RST) begin
             sp <= 10'b1;
             mem[0] <= 8'b0;
-            TOP_DATA <= 8'b0;
         end
         else if (I_VALID && !FULL) begin
             sp <= sp + 10'b1;
@@ -44,7 +43,9 @@ module lifo_8in_8out_1024
     end
 
     always @* begin
-        if (I_VALID)
+        if (RST)
+            TOP_DATA <= 8'b0;
+        else if (I_VALID)
             TOP_DATA <= I_DATA;
         else if (O_EN)
             TOP_DATA <= sp < 10'd2 ? 8'b0 : mem[sp - 10'd2];

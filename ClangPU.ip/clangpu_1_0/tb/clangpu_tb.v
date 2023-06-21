@@ -35,9 +35,10 @@ wire            MEM_WAIT    = core.fetch.MEM_WAIT;
 wire            LEX_FOUND_EOF   = core.lexer.FOUND_EOF;
 wire            LEX_I_VALID     = core.ffifo_o_valid;
 wire [7:0]      LEX_I_CHAR      = core.ffifo_o_data;
-wire            LEX_O_VALID     = core.lexer.O_VALID;          
+wire            LEX_O_VALID     = core.lexer.O_VALID;
 wire [15:0]     LEX_O_TOKEN     = core.lexer.O_DATA;
 wire [63:0]     LEX_STR64       = core.lexer.str_64;
+wire [15:0]     LEX_READY_O     = core.lexer.o_data_ready;
 
 wire            PARSER_I_VALID  = core.parser.I_VALID;
 wire [15:0]     PARSER_I_TOKEN  = core.parser.I_TOKEN;
@@ -61,13 +62,13 @@ begin
     i = 0;
     fd = $fopen("../../../../../../ClangPU.ip/clangpu_1_0/tb/test.c", "rb");
     while ($feof(fd) == 0) begin
-        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][7:0]   = c[7:0];
-        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][15:8]  = c[7:0];
-        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][23:16] = c[7:0];
-        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][31:24] = c[7:0];
+        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][31:24]   = c[7:0];
+        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][23:16]   = c[7:0];
+        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][15:8]    = c[7:0];
+        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][7:0]     = c[7:0];
         i = i + 1;
     end
-end 
+end
 endtask
 
 /* ----- テストベンチ本体 ----- */

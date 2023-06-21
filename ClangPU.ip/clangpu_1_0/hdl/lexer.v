@@ -45,7 +45,7 @@ module lexer
         else if(I_VALID) begin
             if (
                 I_DATA == 8'h00 || I_DATA == 8'hff ||                   // EOF
-                I_DATA == 8'h09 || I_DATA == 8'h0a || I_DATA == 8'h20   // ' ', '\n', '\t'
+                I_DATA == 8'h09 || I_DATA == 8'h0d || I_DATA == 8'h0a || I_DATA == 8'h20   // ' ', '\n', '\t'
             ) begin
                 str_64 <= {
                     str_8x8[7][7:0], str_8x8[6][7:0], str_8x8[5][7:0], str_8x8[4][7:0],
@@ -98,5 +98,5 @@ module lexer
             O_DATA <= o_data_ready;
         end
     end
-    
+
 endmodule

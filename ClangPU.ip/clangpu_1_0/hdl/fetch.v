@@ -67,7 +67,7 @@ module fetch #
 
     /* ----- BRAM ----- */
     wire [9:0]  bram_addr   = loaded ? I_ADDR[11:2] : r_waddr[11:2];
-    wire [31:0] bram_din    = { M_AXI_RDATA[7:0], M_AXI_RDATA[15:8], M_AXI_RDATA[23:16], M_AXI_RDATA[31:24] };
+    wire [31:0] bram_din    = M_AXI_RDATA;
     wire [3:0]  bram_wren   = M_AXI_RVALID ? 4'hf : 4'h0;
 
     bram_4kb bram_4kb (
