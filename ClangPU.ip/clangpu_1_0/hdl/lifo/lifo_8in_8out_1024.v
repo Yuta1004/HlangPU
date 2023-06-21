@@ -44,11 +44,11 @@ module lifo_8in_8out_1024
 
     always @* begin
         if (RST)
-            TOP_DATA <= 8'b0;
-        else if (I_VALID)
-            TOP_DATA <= I_DATA;
-        else if (O_EN)
-            TOP_DATA <= sp < 10'd2 ? 8'b0 : mem[sp - 10'd2];
+            TOP_DATA = 8'b0;
+        else if (I_VALID && !CLK)
+            TOP_DATA = I_DATA;
+        else if (O_EN && !CLK)
+            TOP_DATA = sp < 10'd2 ? 8'b0 : mem[sp - 10'd2];
     end
 
 endmodule

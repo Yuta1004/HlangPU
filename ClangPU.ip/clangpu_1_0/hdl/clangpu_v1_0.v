@@ -137,7 +137,7 @@ module core #
         // 制御
         .MEM_WAIT   (mem_wait),
 
-        // 入出力 
+        // 入出力
         .I_ADDR     (fetch_i_addr),
         .I_VALID    (fetch_i_valid),
         // .O_ADDR  (),
@@ -260,13 +260,13 @@ module core #
                     p_next_state <= S_P_PWAIT;
                 else
                     p_next_state <= S_P_FWAIT;
-            
+
             S_P_PWAIT:
                 if (parser_receive)
                     p_next_state <= S_P_READY;
                 else
                     p_next_state <= S_P_PWAIT;
-            
+
             default:
                 p_next_state <= S_P_READY;
         endcase
@@ -302,7 +302,7 @@ module core #
         // 制御
         .RECEIVE(parser_receive),
         .STAT   (parser_stat),
-        
+
         // 入出力
         .I_VALID(parser_i_valid),
         .I_TOKEN(parser_i_token),

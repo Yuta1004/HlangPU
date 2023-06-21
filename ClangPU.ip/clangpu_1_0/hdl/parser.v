@@ -123,7 +123,7 @@ module parser
             RECEIVE <= 1'b0;
         else if (state == S_MOVE && next_state != S_REDUCE)
             RECEIVE <= 1'b1;
-        else 
+        else
             RECEIVE <= 1'b0;
     end
 
