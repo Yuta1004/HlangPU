@@ -74,7 +74,7 @@ module core #
         input wire          CRST,
         input wire          CEXEC,
         input wire  [31:0]  CMEM_ADDR,
-        output wire         CSTAT
+        output wire [7:0]   CSTAT
     );
 
     /* ----- AXIバス設定 ----- */
@@ -102,7 +102,7 @@ module core #
     assign M_AXI_BREADY = 1'b0;     // *
 
     /* ----- 状態 ----- */
-    assign CSTAT = 1'b1;
+    assign CSTAT = { 5'b0, parser_stat[2:0] };
 
     /* ----- フェッチ部 ----- */
     wire        mem_wait, fetch_o_valid;
@@ -231,6 +231,7 @@ module core #
     reg [1:0]   p_state, p_next_state;
 
     wire        parser_receive, parser_o_valid;
+    wire [2:0]  parser_stat;
     wire [15:0] parser_o_rule;
     reg         parser_i_valid;
     reg  [15:0] parser_i_token;
@@ -296,6 +297,7 @@ module core #
 
         // 制御
         .RECEIVE(parser_receive),
+        .STAT   (parser_stat),
         
         // 入出力
         .I_VALID(parser_i_valid),

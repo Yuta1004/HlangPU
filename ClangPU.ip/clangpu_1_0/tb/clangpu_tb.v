@@ -10,7 +10,7 @@ localparam integer STEP = 1000 / 50;   // 50Mhz
 /* ----- ClangPU接続用 ----- */
 reg             CEXEC;
 reg             CMEM_ADDR;
-wire            CSTAT;
+wire [7:0]      CSTAT;
 
 /* ----- クロック ----- */
 reg AXI_CLK, CCLK;

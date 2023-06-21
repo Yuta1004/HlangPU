@@ -6,6 +6,7 @@ module parser
 
         /* ----- 制御 ----- */
         output reg          RECEIVE,
+        output wire [2:0]   STAT,
 
         /* ----- 入出力 ----- */
         input wire          I_VALID,
@@ -65,7 +66,13 @@ module parser
     parameter S_ACCEPT  = 3'b110;
     parameter S_ERROR   = 3'b111;
 
-    reg  [3:0]  state, next_state; 
+    reg  [2:0]  state, next_state;
+
+    assign STAT = {
+        !state[2],          // wait
+        state == S_ACCEPT,  // accept
+        state == S_ERROR    // error
+    };
 
     always @ (posedge CLK) begin
         if (RST)
