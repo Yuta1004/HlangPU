@@ -32,11 +32,12 @@ wire            O_VALID     = core.fetch.O_VALID;
 wire [31:0]     O_DATA      = core.fetch.O_DATA;
 wire            MEM_WAIT    = core.fetch.MEM_WAIT;
 
-wire            LEX_I_VALID = core.ffifo_o_valid;
-wire [7:0]      LEX_I_CHAR  = core.ffifo_o_data;
-wire            LEX_O_VALID = core.lexer.O_VALID;          
-wire [15:0]     LEX_O_TOKEN = core.lexer.O_DATA;
-wire [63:0]     LEX_STR64   = core.lexer.str_64;
+wire            LEX_FOUND_EOF   = core.lexer.FOUND_EOF;
+wire            LEX_I_VALID     = core.ffifo_o_valid;
+wire [7:0]      LEX_I_CHAR      = core.ffifo_o_data;
+wire            LEX_O_VALID     = core.lexer.O_VALID;          
+wire [15:0]     LEX_O_TOKEN     = core.lexer.O_DATA;
+wire [63:0]     LEX_STR64       = core.lexer.str_64;
 
 wire            PARSER_I_VALID  = core.parser.I_VALID;
 wire [15:0]     PARSER_I_TOKEN  = core.parser.I_TOKEN;

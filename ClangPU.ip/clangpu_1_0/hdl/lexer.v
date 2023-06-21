@@ -4,6 +4,9 @@ module lexer
         input wire CLK,
         input wire RST,
 
+        /* ----- 制御用 ----- */
+        output reg          FOUND_EOF,
+
         /* ----- 入出力 ----- */
         input wire          I_VALID,
         input wire  [7:0]   I_DATA,
@@ -85,10 +88,12 @@ module lexer
 
     always @ (posedge CLK) begin
         if (RST) begin
+            FOUND_EOF <= 1'b0;
             O_VALID <= 1'b0;
             O_DATA <= 64'b0;
         end
         else begin
+            FOUND_EOF <= FOUND_EOF | o_data_ready[15:8] == EOF;
             O_VALID <= (o_data_ready != 64'b0) && (o_data_ready != O_DATA);
             O_DATA <= o_data_ready;
         end

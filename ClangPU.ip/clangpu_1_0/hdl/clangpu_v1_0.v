@@ -183,6 +183,7 @@ module core #
     );
 
     /* ----- レキサ ----- */
+    wire        lexer_found_eof;
     wire [15:0] lexer_o_data;
 
     wire        lfifo_o_valid, lfifo_o_empty;
@@ -193,7 +194,7 @@ module core #
         if (CRST)
             ffifo_o_en <= 1'b0;
         else
-            ffifo_o_en <= !ffifo_o_empty;
+            ffifo_o_en <= !lexer_found_eof && !ffifo_o_empty;
     end
 
     lexer lexer (
@@ -201,11 +202,14 @@ module core #
         .CLK    (CCLK),
         .RST    (CRST),
 
+        // 制御
+        .FOUND_EOF  (lexer_found_eof),
+
         // 入出力
-        .I_VALID(ffifo_o_valid),
-        .I_DATA (ffifo_o_data),
-        .O_VALID(lexer_o_valid),
-        .O_DATA (lexer_o_data)
+        .I_VALID    (ffifo_o_valid),
+        .I_DATA     (ffifo_o_data),
+        .O_VALID    (lexer_o_valid),
+        .O_DATA     (lexer_o_data)
     );
 
     fifo_16in_16out_1024 lfifo (
