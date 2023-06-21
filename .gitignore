@@ -27,6 +27,7 @@
 *.runs/
 *.ip_user_files/
 *.tmp/
+*.metadata/
 
 #########
 #Source files:
