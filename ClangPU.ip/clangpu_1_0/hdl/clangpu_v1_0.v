@@ -117,7 +117,7 @@ module core #
 
     always @ (posedge CCLK) begin
         if (CRST) begin
-            fetch_i_addr <= 32'hffff_fffc;
+            fetch_i_addr <= CMEM_ADDR - 32'd4;
             fetch_i_valid <= 1'b0;
         end
         else if (ffifo_wr_data_count >= 1024) begin
