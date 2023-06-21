@@ -9,10 +9,10 @@ preplace port DDR -pg 1 -lvl 7 -x 2180 -y 130 -defaultsOSRD
 preplace port FIXED_IO -pg 1 -lvl 7 -x 2180 -y 150 -defaultsOSRD
 preplace inst axi_interconnect_0 -pg 1 -lvl 3 -x 860 -y 180 -defaultsOSRD
 preplace inst axi_interconnect_1 -pg 1 -lvl 5 -x 1670 -y 270 -defaultsOSRD
-preplace inst core_controller_0 -pg 1 -lvl 6 -x 1990 -y 520 -defaultsOSRD
 preplace inst processing_system7_0 -pg 1 -lvl 4 -x 1250 -y 190 -defaultsOSRD
 preplace inst rst_ps7_0_50M -pg 1 -lvl 1 -x 160 -y 120 -defaultsOSRD
 preplace inst clangpu_0 -pg 1 -lvl 2 -x 510 -y 130 -defaultsOSRD
+preplace inst core_controller_0 -pg 1 -lvl 6 -x 1990 -y 520 -defaultsOSRD
 preplace netloc clangpu_0_STAT 1 2 4 650 50 NJ 50 NJ 50 1830J
 preplace netloc core_controller_0_CEXEC 1 1 6 370 390 NJ 390 NJ 390 NJ 390 NJ 390 2140
 preplace netloc core_controller_0_CMEM_ADDR 1 1 6 350 -10 NJ -10 NJ -10 NJ -10 NJ -10 2160

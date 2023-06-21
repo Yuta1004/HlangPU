@@ -84,7 +84,7 @@ module core_controller_auto_generated #
     // AXIバスへの出力生成
     always @* begin
         case (S_AXI_ARADDR)
-            16'h000c:   reg_data_out <= icache_slv_reg3[1];
+            16'h000c:   reg_data_out <= { 24'b0, icache_slv_reg3[1] };
             default:    reg_data_out <= 0;
         endcase
     end

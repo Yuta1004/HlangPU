@@ -163,8 +163,8 @@ module core_controller_AXI #
     end
 
     // RDATA信号生成
-    wire reg_data_out;
-    wire slv_reg_rden = axi_arready & S_AXI_ARVALID & ~axi_rvalid;
+    wire [C_S_AXI_DATA_WIDTH-1:0]   reg_data_out;
+    wire                            slv_reg_rden = axi_arready & S_AXI_ARVALID & ~axi_rvalid;
 
     always @(posedge S_AXI_ACLK) begin
         if (S_AXI_ARSTN == 1'b0) begin
