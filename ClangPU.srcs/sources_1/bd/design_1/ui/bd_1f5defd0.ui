@@ -1,17 +1,17 @@
 {
    "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"0.540636",
-   "Default View_TopLeft":"0,-166",
+   "Default View_ScaleFactor":"0.507745",
+   "Default View_TopLeft":"-10,-203",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
 #  -string -flagsOSRD
 preplace port DDR -pg 1 -lvl 7 -x 2200 -y 130 -defaultsOSRD
 preplace port FIXED_IO -pg 1 -lvl 7 -x 2200 -y 150 -defaultsOSRD
-preplace inst processing_system7_0 -pg 1 -lvl 4 -x 1270 -y 190 -defaultsOSRD
-preplace inst rst_ps7_0_50M -pg 1 -lvl 1 -x 200 -y 120 -defaultsOSRD
 preplace inst axi_interconnect_0 -pg 1 -lvl 3 -x 880 -y 180 -defaultsOSRD
 preplace inst axi_interconnect_1 -pg 1 -lvl 5 -x 1690 -y 270 -defaultsOSRD
 preplace inst core_controller_0 -pg 1 -lvl 6 -x 2010 -y 520 -defaultsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 4 -x 1270 -y 190 -defaultsOSRD
+preplace inst rst_ps7_0_50M -pg 1 -lvl 1 -x 200 -y 120 -defaultsOSRD
 preplace inst clangpu_0 -pg 1 -lvl 2 -x 550 -y 130 -defaultsOSRD
 preplace netloc clangpu_0_STAT 1 2 4 690 50 NJ 50 NJ 50 1860J
 preplace netloc core_controller_0_CEXEC 1 1 6 410 240 720J -20 NJ -20 NJ -20 NJ -20 2180
