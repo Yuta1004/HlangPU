@@ -62,10 +62,10 @@ begin
     i = 0;
     fd = $fopen("../../../../../../ClangPU.ip/clangpu_1_0/tb/test.c", "rb");
     while ($feof(fd) == 0) begin
-        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][31:24]   = c[7:0];
-        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][23:16]   = c[7:0];
-        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][15:8]    = c[7:0];
-        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][7:0]     = c[7:0];
+        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][7:0]    = c[7:0];
+        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][15:8]   = c[7:0];
+        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][23:16]  = c[7:0];
+        c = $fgetc(fd); axi_slave_bfm_inst.ram_array[i][31:24]  = c[7:0];
         i = i + 1;
     end
 end
