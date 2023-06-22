@@ -1,4 +1,4 @@
-# ClangPU(lr_rule)
+# HlangPU(lr_rule)
 
 ## ファイル
 

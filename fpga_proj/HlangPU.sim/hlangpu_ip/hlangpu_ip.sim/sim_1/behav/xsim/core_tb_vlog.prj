@@ -1,0 +1,21 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../../../HlangPU.ip/hlangpu_1_0/hdl" --include "../../../../../../HlangPU.ip/hlangpu_1_0/tb" \
+"../../../../../../HlangPU.tmp/hlangpu_v1_0_project/hlangpu_v1_0_project.gen/sources_1/ip/fifo_32in_32out_1024/sim/fifo_32in_32out_1024.v" \
+"../../../../../../HlangPU.tmp/hlangpu_v1_0_project/hlangpu_v1_0_project.gen/sources_1/ip/fifo_16in_16out_1024/sim/fifo_16in_16out_1024.v" \
+"../../../../../../HlangPU.tmp/hlangpu_v1_0_project/hlangpu_v1_0_project.gen/sources_1/ip/fifo_32in_8out_2048/sim/fifo_32in_8out_2048.v" \
+"../../../../../../HlangPU.tmp/hlangpu_v1_0_project/hlangpu_v1_0_project.gen/sources_1/ip/bram_4kb/sim/bram_4kb.v" \
+"../../../../../../HlangPU.ip/hlangpu_1_0/tb/axi_slave_BFM.v" \
+"../../../../../../HlangPU.ip/hlangpu_1_0/hdl/exec.v" \
+"../../../../../../HlangPU.ip/hlangpu_1_0/hdl/fetch.v" \
+"../../../../../../HlangPU.ip/hlangpu_1_0/hdl/hlangpu_v1_0.v" \
+"../../../../../../HlangPU.ip/hlangpu_1_0/hdl/lexer.v" \
+"../../../../../../HlangPU.ip/hlangpu_1_0/hdl/lifo/lifo_8in_8out_1024.v" \
+"../../../../../../HlangPU.ip/hlangpu_1_0/hdl/parser.v" \
+"../../../../../../HlangPU.ip/hlangpu_1_0/tb/sync_fifo.v" \
+"../../../../../../HlangPU.ip/hlangpu_1_0/tb/hlangpu_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

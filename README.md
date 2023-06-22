@@ -1,6 +1,6 @@
-# ClangPU
+# HlangPU
 
-C-language PU
+High-level-language PU
 
 ## ディレクトリ構成
 

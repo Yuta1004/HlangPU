@@ -1,10 +1,10 @@
-# ClangPU(fpga_proj)
+# HlangPU(fpga_proj)
 
 ## ディレクトリ構成
 
-- ClangPU.ip/ : IP
-    - clangpu\_1\_0 : ClangPU本体
+- HlangPU.ip/ : IP
+    - hlangpu\_1\_0 : GlangPU本体
     - core\_controller\_1\_0 : AXIバス経由で制御するためのController
-- ClangPU.sim/ : シミュレーションプロジェクト用
-    - clangpu_ip : ClangPU IP シミュレーションプロジェクト
-- ClangPU.sw/ : Vitisプロジェクト
+- HlangPU.sim/ : シミュレーションプロジェクト用
+    - hlangpu_ip : HlangPU IP シミュレーションプロジェクト
+- HlangPU.sw/ : Vitisプロジェクト
