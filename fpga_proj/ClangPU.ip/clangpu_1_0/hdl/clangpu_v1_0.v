@@ -236,7 +236,7 @@ module core #
 
     wire        parser_receive, parser_o_valid;
     wire [2:0]  parser_stat;
-    wire [15:0] parser_o_rule;
+    wire [15:0] parser_o_shift, parser_o_reduce;
     reg         parser_i_valid;
     reg  [15:0] parser_i_token;
 
@@ -300,14 +300,15 @@ module core #
         .RST    (CRST),
 
         // 制御
-        .RECEIVE(parser_receive),
-        .STAT   (parser_stat),
+        .RECEIVE    (parser_receive),
+        .STAT       (parser_stat),
 
         // 入出力
-        .I_VALID(parser_i_valid),
-        .I_TOKEN(parser_i_token),
-        .O_VALID(parser_o_valid),
-        .O_RULE (parser_o_rule)
+        .I_VALID    (parser_i_valid),
+        .I_TOKEN    (parser_i_token),
+        .O_VALID    (parser_o_valid),
+        .O_SHIFT    (parser_o_shift),
+        .O_REDUCE   (parser_o_reduce)
     );
 
 endmodule

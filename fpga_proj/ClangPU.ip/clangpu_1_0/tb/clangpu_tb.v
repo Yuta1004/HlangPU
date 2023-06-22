@@ -32,27 +32,28 @@ wire            O_VALID     = core.fetch.O_VALID;
 wire [31:0]     O_DATA      = core.fetch.O_DATA;
 wire            MEM_WAIT    = core.fetch.MEM_WAIT;
 
-wire            LEX_FOUND_EOF   = core.lexer.FOUND_EOF;
+// wire            LEX_FOUND_EOF   = core.lexer.FOUND_EOF;
 wire            LEX_I_VALID     = core.ffifo_o_valid;
 wire [7:0]      LEX_I_CHAR      = core.ffifo_o_data;
 wire            LEX_O_VALID     = core.lexer.O_VALID;
 wire [15:0]     LEX_O_TOKEN     = core.lexer.O_DATA;
-wire [63:0]     LEX_STR64       = core.lexer.str_64;
-wire [15:0]     LEX_READY_O     = core.lexer.o_data_ready;
+// wire [63:0]     LEX_STR64       = core.lexer.str_64;
+// wire [15:0]     LEX_READY_O     = core.lexer.o_data_ready;
 
 wire            PARSER_I_VALID  = core.parser.I_VALID;
 wire [15:0]     PARSER_I_TOKEN  = core.parser.I_TOKEN;
 wire            PARSER_O_VALID  = core.parser.O_VALID;
-wire [15:0]     PARSER_O_RULE   = core.parser.O_RULE;
-wire            PARSER_RECEIVE  = core.parser.RECEIVE;
-wire [3:0]      PARSER_STATE    = core.parser.state;
-wire [1:0]      PARSER_ACTION   = core.parser.action;
-wire [7:0]      PARSER_AVALUE   = core.parser.avalue;
-wire            PARSER_S_PUSH   = core.parser.push_en;
-wire [7:0]      PARSER_S_PUSHD  = core.parser.push_data;
-wire            PARSER_S_POP    = core.parser.pop_en;
-wire [7:0]      PARSER_S_TOP    = core.parser.top_data;
-wire [7:0]      PARSER_R_MEMO   = core.parser.reduce_memo;
+wire [15:0]     PARSER_O_SHIFT  = core.parser.O_SHIFT;
+wire [15:0]     PARSER_O_REDUCE = core.parser.O_REDUCE;
+// wire            PARSER_RECEIVE  = core.parser.RECEIVE;
+// wire [3:0]      PARSER_STATE    = core.parser.state;
+// wire [1:0]      PARSER_ACTION   = core.parser.action;
+// wire [7:0]      PARSER_AVALUE   = core.parser.avalue;
+// wire            PARSER_S_PUSH   = core.parser.push_en;
+// wire [7:0]      PARSER_S_PUSHD  = core.parser.push_data;
+// wire            PARSER_S_POP    = core.parser.pop_en;
+// wire [7:0]      PARSER_S_TOP    = core.parser.top_data;
+// wire [7:0]      PARSER_R_MEMO   = core.parser.reduce_memo;
 
 /* ----- 命令書き込み ----- */
 task write_inst;

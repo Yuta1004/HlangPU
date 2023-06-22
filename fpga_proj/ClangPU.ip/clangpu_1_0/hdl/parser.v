@@ -12,7 +12,8 @@ module parser
         input wire          I_VALID,
         input wire  [15:0]  I_TOKEN,
         output reg          O_VALID,
-        output reg  [15:0]  O_RULE
+        output reg  [15:0]  O_SHIFT,
+        output reg  [15:0]  O_REDUCE
     );
 
     function [9:0] idx_64x16;
@@ -112,15 +113,21 @@ module parser
     always @ (posedge CLK) begin
         if (RST) begin
             O_VALID <= 1'b0;
-            O_RULE <= 16'b0;
+            O_SHIFT <= 16'b0;
+            O_REDUCE <= 16'b0;
+        end
+        else if (state == S_SHIFT) begin
+            O_VALID <= 1'b1;
+            O_SHIFT <= I_TOKEN;
         end
         else if (state == S_REDUCE && next_state == S_MOVE) begin
             O_VALID <= 1'b1;
-            O_RULE <= reduce_memo;
+            O_REDUCE <= reduce_memo;
         end
         else begin
             O_VALID <= 1'b0;
-            O_RULE <= 1'b0;
+            O_SHIFT <= 16'b0;
+            O_REDUCE <= 16'b0;
         end
     end
 
