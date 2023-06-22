@@ -15,10 +15,10 @@ module parser
         output reg  [15:0]  O_RULE
     );
 
-    function [9:0] idx_43x16;
+    function [9:0] idx_64x16;
         input [7:0] row;
         input [7:0] col;
-        idx_43x16 = { row[5:0], 4'b0 } + { 2'b0, col[7:0] };
+        idx_64x16 = { row[5:0], 4'b0 } + { 2'b0, col[7:0] };
     endfunction
 
     /* ----- LR表 ----- */
@@ -27,12 +27,12 @@ module parser
     parameter REDUCE    = 2'h2;
     parameter ACCEPT    = 2'h3;
 
-    reg [9:0]   action_table [0:43*16-1];   // 43(States) x 16(Tokens(+3))
-    reg [7:0]   reduce_table [0:13*1-1];    // 13(Rules)
-    reg [7:0]   goto_table   [0:43*16-1];   // 43(States) x 16(Rules(+3))
+    reg [9:0]   action_table [0:64*16-1];   // max : 64(States) x 16(Tokens)
+    reg [7:0]   reduce_table [0:16*1-1];    // max : 16(Rules)
+    reg [7:0]   goto_table   [0:64*16-1];   // max : 64(States) x 16(Rules(+3))
 
-    wire [1:0]  action  = action_table[idx_43x16(top_data, I_TOKEN[15:8])][9:8];
-    wire [7:0]  avalue  = action_table[idx_43x16(top_data, I_TOKEN[15:8])][7:0];
+    wire [1:0]  action  = action_table[idx_64x16(top_data, I_TOKEN[15:8])][9:8];
+    wire [7:0]  avalue  = action_table[idx_64x16(top_data, I_TOKEN[15:8])][7:0];
 
     always @ (posedge CLK) begin
         if (RST) begin
@@ -160,7 +160,7 @@ module parser
             else if (reduce_pop_nums == 8'b1) begin
                 pop_en <= 1'b0;
                 push_en <= 1'b1;
-                push_data <= goto_table[idx_43x16(top_data, reduce_memo)];
+                push_data <= goto_table[idx_64x16(top_data, reduce_memo)];
                 reduce_pop_nums <= reduce_pop_nums - 8'b1;
             end
             else if (reduce_pop_nums == 8'b0)
