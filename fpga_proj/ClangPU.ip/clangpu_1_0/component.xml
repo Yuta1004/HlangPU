@@ -429,7 +429,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>82ddc5c2</spirit:value>
+            <spirit:value>c7bf5202</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -451,7 +451,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>82ddc5c2</spirit:value>
+            <spirit:value>c7bf5202</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1238,7 +1238,7 @@
         <spirit:wire>
           <spirit:direction>out</spirit:direction>
           <spirit:vector>
-            <spirit:left spirit:format="long">7</spirit:left>
+            <spirit:left spirit:format="long">15</spirit:left>
             <spirit:right spirit:format="long">0</spirit:right>
           </spirit:vector>
           <spirit:wireTypeDefs>
@@ -1315,6 +1315,11 @@
     <spirit:fileSet>
       <spirit:name>xilinx_verilogsynthesis_view_fileset</spirit:name>
       <spirit:file>
+        <spirit:name>src/fifo_32in_32out_1024/fifo_32in_32out_1024.xci</spirit:name>
+        <spirit:userFileType>xci</spirit:userFileType>
+        <spirit:userFileType>CELL_NAME_pfifo</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
         <spirit:name>src/fifo_16in_16out_1024/fifo_16in_16out_1024.xci</spirit:name>
         <spirit:userFileType>xci</spirit:userFileType>
         <spirit:userFileType>CELL_NAME_lfifo</spirit:userFileType>
@@ -1330,13 +1335,12 @@
         <spirit:userFileType>CELL_NAME_fetch/bram_4kb</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/fetch.v</spirit:name>
+        <spirit:name>hdl/exec.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/init_tokens.vh</spirit:name>
+        <spirit:name>hdl/fetch.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
-        <spirit:isIncludeFile>true</spirit:isIncludeFile>
       </spirit:file>
       <spirit:file>
         <spirit:name>hdl/lexer.v</spirit:name>
@@ -1358,7 +1362,7 @@
       <spirit:file>
         <spirit:name>hdl/clangpu_v1_0.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_c913dbb7</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_2e5bc016</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -1384,6 +1388,11 @@
     <spirit:fileSet>
       <spirit:name>xilinx_verilogbehavioralsimulation_view_fileset</spirit:name>
       <spirit:file>
+        <spirit:name>src/fifo_32in_32out_1024/fifo_32in_32out_1024.xci</spirit:name>
+        <spirit:userFileType>xci</spirit:userFileType>
+        <spirit:userFileType>CELL_NAME_pfifo</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
         <spirit:name>src/fifo_16in_16out_1024/fifo_16in_16out_1024.xci</spirit:name>
         <spirit:userFileType>xci</spirit:userFileType>
         <spirit:userFileType>CELL_NAME_lfifo</spirit:userFileType>
@@ -1399,13 +1408,12 @@
         <spirit:userFileType>CELL_NAME_fetch/bram_4kb</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/fetch.v</spirit:name>
+        <spirit:name>hdl/exec.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/init_tokens.vh</spirit:name>
+        <spirit:name>hdl/fetch.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
-        <spirit:isIncludeFile>true</spirit:isIncludeFile>
       </spirit:file>
       <spirit:file>
         <spirit:name>hdl/lexer.v</spirit:name>
@@ -1536,15 +1544,15 @@
         <xilinx:xpmLibrary>XPM_CDC</xilinx:xpmLibrary>
         <xilinx:xpmLibrary>XPM_MEMORY</xilinx:xpmLibrary>
       </xilinx:xpmLibraries>
-      <xilinx:coreRevision>15</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2023-06-22T12:46:53Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>17</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2023-06-22T19:54:13Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2022.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="ad99838b"/>
       <xilinx:checksum xilinx:scope="addressSpaces" xilinx:value="579e50e2"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="981a896f"/>
-      <xilinx:checksum xilinx:scope="ports" xilinx:value="890e88dd"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="95c95adf"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="1ad68d36"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="332e4ade"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="00712396"/>
     </xilinx:packagingInfo>

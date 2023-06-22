@@ -2,9 +2,10 @@
   "schema": "xilinx.com:schema:json_instance:1.0",
   "ip_inst": {
     "xci_name": "fifo_32in_32out_1024",
+    "cell_name": "pfifo",
     "component_reference": "xilinx.com:ip:fifo_generator:13.2",
     "ip_revision": "7",
-    "gen_directory": ".",
+    "gen_directory": "../../../../ClangPU.tmp/clangpu_v1_0_project/clangpu_v1_0_project.gen/sources_1/ip/fifo_32in_32out_1024",
     "parameters": {
       "component_parameters": {
         "Component_Name": [ { "value": "fifo_32in_32out_1024", "resolve_type": "user", "usage": "all" } ],
@@ -399,11 +400,11 @@
         "IPCONTEXT": [ { "value": "IP_Flow" } ],
         "IPREVISION": [ { "value": "7" } ],
         "MANAGED": [ { "value": "TRUE" } ],
-        "OUTPUTDIR": [ { "value": "." } ],
+        "OUTPUTDIR": [ { "value": "../../../../ClangPU.tmp/clangpu_v1_0_project/clangpu_v1_0_project.gen/sources_1/ip/fifo_32in_32out_1024" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "." } ],
         "SWVERSION": [ { "value": "2022.2" } ],
-        "SYNTHESISFLOW": [ { "value": "OUT_OF_CONTEXT" } ]
+        "SYNTHESISFLOW": [ { "value": "GLOBAL" } ]
       }
     },
     "boundary": {
