@@ -1,4 +1,4 @@
-# ClangPU(fpga_proj)
+# ClangPU(lr_rule)
 
 ## ファイル
 
