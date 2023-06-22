@@ -1,15 +1,17 @@
 // Table gen at 'https://jsmachines.sourceforge.net/machines/lr1.html'
 
-PROGRAM -> STMT PROGRAM
-PROGRAM -> ''
-STMT -> EXPR ;
-STMT -> out EXPR ;
-STMT -> a = EXPR ;
-STMT -> b = EXPR ;
-STMT -> c = EXPR ;
-STMT -> if ( EXPR ) STMT
-EXPR -> EXPR + FACT
-EXPR -> EXPR - FACT
-EXPR -> FACT
-FACT -> num
-FACT -> ( EXPR )
+ 0: PROGRAM -> STMT PROGRAM
+ 1: PROGRAM -> ''
+ 2: STMT -> EXPR ;
+ 3: STMT -> out EXPR ;
+ 4: STMT -> var = EXPR ;
+ 5: STMT -> var = EXPR if ( EXPR ) ;
+ 6: EXPR -> EXPR << TERM
+ 7: EXPR -> EXPR >> TERM
+ 8: EXPR -> TERM
+ 9: TERM -> TERM + FACT
+10: TERM -> TERM - FACT
+11: TERM -> FACT
+12: FACT -> num
+13: FACT -> var
+14: FACT -> ( EXPR )

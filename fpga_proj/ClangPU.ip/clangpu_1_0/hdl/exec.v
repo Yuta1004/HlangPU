@@ -32,8 +32,11 @@ module exec
 
     always @* begin
         if (I_VALID && I_SHIFT != 16'b0) begin
-            vlifo_push_en <= I_SHIFT[15:8] == 8'h00;
-            vlifo_push_data <= I_SHIFT[7:0];
+            vlifo_push_en <= I_SHIFT[15:8] == 8'h02 || I_SHIFT[15:8] == 8'h0b;
+            if (I_SHIFT[15:8] == 8'h02)
+                vlifo_push_data <= I_SHIFT[7:0] - 8'h60;
+            else
+                vlifo_push_data <= I_SHIFT[7:0];
         end
         else begin
             vlifo_push_en <= push_exec_res;
@@ -67,17 +70,17 @@ module exec
             popnums_table[ 1] <= 8'd0;
             popnums_table[ 2] <= 8'd1;
             popnums_table[ 3] <= 8'd1;
-            popnums_table[ 4] <= 8'd1;
-            popnums_table[ 5] <= 8'd1;
-            popnums_table[ 6] <= 8'd1;
-            popnums_table[ 7] <= 8'd1;
-            popnums_table[ 8] <= 8'd2;
+            popnums_table[ 4] <= 8'd2;
+            popnums_table[ 5] <= 8'd3;
+            popnums_table[ 6] <= 8'd2;
+            popnums_table[ 7] <= 8'd2;
+            popnums_table[ 8] <= 8'd1;
             popnums_table[ 9] <= 8'd2;
-            popnums_table[10] <= 8'd1;
+            popnums_table[10] <= 8'd2;
             popnums_table[11] <= 8'd1;
             popnums_table[12] <= 8'd1;
-            popnums_table[13] <= 8'd0;
-            popnums_table[14] <= 8'd0;
+            popnums_table[13] <= 8'd1;
+            popnums_table[14] <= 8'd1;
             popnums_table[15] <= 8'd0;
         end
     end
@@ -90,10 +93,11 @@ module exec
     reg [1:0]   state, next_state;
 
     reg [7:0]   pop_nums;
-    reg [7:0]   poped_values [0:7];
+    reg [7:0]   poped_values    [0:7];
 
     reg         push_exec_res;
     reg [7:0]   exec_res;
+    reg [7:0]   registers       [0:15];
 
     always @ (posedge CLK) begin
         if (RST)
@@ -145,6 +149,22 @@ module exec
             O_RESULT <= 8'b0;
             push_exec_res <= 1'b0;
             exec_res <= 8'b0;
+            registers[ 0] <= 8'b0;
+            registers[ 1] <= 8'b0;
+            registers[ 2] <= 8'b0;
+            registers[ 3] <= 8'b0;
+            registers[ 4] <= 8'b0;
+            registers[ 5] <= 8'b0;
+            registers[ 6] <= 8'b0;
+            registers[ 7] <= 8'b0;
+            registers[ 8] <= 8'b0;
+            registers[ 9] <= 8'b0;
+            registers[10] <= 8'b0;
+            registers[11] <= 8'b0;
+            registers[12] <= 8'b0;
+            registers[13] <= 8'b0;
+            registers[14] <= 8'b0;
+            registers[15] <= 8'b0;
         end
         else if (state == S_EXEC)
             case (I_REDUCE)
@@ -154,51 +174,72 @@ module exec
                 // ( 1) PROGRAM -> ''
                 8'd1: ;
 
-                // ( 2) STMT -> EXPR
+                // ( 2) STMT -> EXPR ;
                 8'd2: ;
 
                 // ( 3) STMT -> out EXPR ;
                 8'd3:
                     O_RESULT <= poped_values[0];
 
-                // ( 4) STMT -> a = EXPR ;
-                8'd4: ;
+                // ( 4) STMT -> var = EXPR ;
+                8'd4:
+                    registers[poped_values[0][3:0]] <= poped_values[1];
 
-                // ( 5) STMT -> b = EXPR ;
-                8'd5: ;
+                // ( 5) STMT -> var = EXPR if ( EXPR ) ;
+                8'd5:
+                    if (poped_values[2] != 8'b0)
+                        registers[poped_values[0][3:0]] <= poped_values[1];
 
-                // ( 6) STMT -> c = EXPR ;
-                8'd6: ;
+                // ( 6) EXPR -> EXPR << TERM
+                8'd6: begin
+                    push_exec_res <= 1'b1;
+                    exec_res <= poped_values[0] << poped_values[1];
+                end
 
-                // ( 7) STMT -> if ( EXPR ) STMT
-                8'd7: ;
+                // ( 7) EXPR -> EXPR >> TERM
+                8'd7: begin
+                    push_exec_res <= 1'b1;
+                    exec_res <= poped_values[0] >> poped_values[1];
+                end
 
-                // ( 8) EXPR -> EXPR + FACT
+                // ( 8) EXPR -> TERM
                 8'd8: begin
-                    push_exec_res <= 1'b1;
-                    exec_res <= poped_values[0] + poped_values[1];
-                end
-
-                // ( 9) EXPR -> EXPR - FACT
-                8'd9: begin
-                    push_exec_res <= 1'b1;
-                    exec_res <= poped_values[0] - poped_values[1];
-                end
-
-                // (10) EXPR -> FACT
-                8'd10: begin
                     push_exec_res <= 1'b1;
                     exec_res <= poped_values[0];
                 end
 
-                // (11) FACT -> num
+                // ( 9) TERM -> TERM + FACT
+                8'd9: begin
+                    push_exec_res <= 1'b1;
+                    exec_res <= poped_values[0] + poped_values[1];
+                end
+
+                // (10) TERM -> TERM - FACT
+                8'd10: begin
+                    push_exec_res <= 1'b1;
+                    exec_res <= poped_values[0] - poped_values[1];
+                end
+
+                // (11) TERM -> FACT
                 8'd11: begin
                     push_exec_res <= 1'b1;
                     exec_res <= poped_values[0];
                 end
 
-                // (12) FACT -> ( EXPR )
+                // (12) FACT -> num
                 8'd12: begin
+                    push_exec_res <= 1'b1;
+                    exec_res <= poped_values[0];
+                end
+
+                // (13) FACT -> var
+                8'd13: begin
+                    push_exec_res <= 1'b1;
+                    exec_res <= registers[poped_values[0][3:0]];
+                end
+
+                // (14) FACT -> ( EXPR )
+                8'd14: begin
                     push_exec_res <= 1'b1;
                     exec_res <= poped_values[0];
                 end
