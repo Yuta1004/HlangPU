@@ -5,7 +5,7 @@
     "cell_name": "ffifo",
     "component_reference": "xilinx.com:ip:fifo_generator:13.2",
     "ip_revision": "7",
-    "gen_directory": "../../../../../../../../../../../users/ynakagami/develop/projects/mitou2023/clangpu/fpga_proj/clangpu.tmp/clangpu_v1_0_project/clangpu_v1_0_project.gen/sources_1/ip/fifo_32in_8out_2048",
+    "gen_directory": "../../../../ClangPU.tmp/clangpu_v1_0_project/clangpu_v1_0_project.gen/sources_1/ip/fifo_32in_8out_2048",
     "parameters": {
       "component_parameters": {
         "Component_Name": [ { "value": "fifo_32in_8out_2048", "resolve_type": "user", "usage": "all" } ],
@@ -400,7 +400,7 @@
         "IPCONTEXT": [ { "value": "IP_Flow" } ],
         "IPREVISION": [ { "value": "7" } ],
         "MANAGED": [ { "value": "TRUE" } ],
-        "OUTPUTDIR": [ { "value": "../../../../../../../../../../../users/ynakagami/develop/projects/mitou2023/clangpu/fpga_proj/clangpu.tmp/clangpu_v1_0_project/clangpu_v1_0_project.gen/sources_1/ip/fifo_32in_8out_2048" } ],
+        "OUTPUTDIR": [ { "value": "../../../../ClangPU.tmp/clangpu_v1_0_project/clangpu_v1_0_project.gen/sources_1/ip/fifo_32in_8out_2048" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "." } ],
         "SWVERSION": [ { "value": "2022.2" } ],

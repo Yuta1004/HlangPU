@@ -153,17 +153,17 @@ module parser
             reduce_pop_nums <= reduce_table[avalue] + 8'd1;
         end
         else if (state == S_REDUCE) begin
-            if (reduce_pop_nums > 8'b1) begin
+            if (reduce_pop_nums > 8'd1) begin
                 pop_en <= 1'b1;
                 reduce_pop_nums <= reduce_pop_nums - 8'b1;
             end
-            else if (reduce_pop_nums == 8'b1) begin
+            else if (reduce_pop_nums == 8'd1) begin
                 pop_en <= 1'b0;
                 push_en <= 1'b1;
                 push_data <= goto_table[idx_64x16(top_data, reduce_memo)];
                 reduce_pop_nums <= reduce_pop_nums - 8'b1;
             end
-            else if (reduce_pop_nums == 8'b0)
+            else if (reduce_pop_nums == 8'd0)
                 push_en <= 1'b0;
         end
     end

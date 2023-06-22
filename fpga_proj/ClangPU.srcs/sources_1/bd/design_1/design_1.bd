@@ -199,7 +199,7 @@
     "components": {
       "axi_interconnect_0": {
         "vlnv": "xilinx.com:ip:axi_interconnect:2.1",
-        "xci_path": "ip\\design_1_axi_interconnect_0_0\\design_1_axi_interconnect_0_0.xci",
+        "xci_path": "ip/design_1_axi_interconnect_0_0/design_1_axi_interconnect_0_0.xci",
         "inst_hier_path": "axi_interconnect_0",
         "xci_name": "design_1_axi_interconnect_0_0",
         "parameters": {
@@ -321,7 +321,7 @@
               "auto_pc": {
                 "vlnv": "xilinx.com:ip:axi_protocol_converter:2.1",
                 "xci_name": "design_1_auto_pc_0",
-                "xci_path": "ip\\design_1_auto_pc_0\\design_1_auto_pc_0.xci",
+                "xci_path": "ip/design_1_auto_pc_0/design_1_auto_pc_0.xci",
                 "inst_hier_path": "axi_interconnect_0/s00_couplers/auto_pc",
                 "parameters": {
                   "MI_PROTOCOL": {
@@ -415,7 +415,7 @@
       },
       "axi_interconnect_1": {
         "vlnv": "xilinx.com:ip:axi_interconnect:2.1",
-        "xci_path": "ip\\design_1_axi_interconnect_1_0\\design_1_axi_interconnect_1_0.xci",
+        "xci_path": "ip/design_1_axi_interconnect_1_0/design_1_axi_interconnect_1_0.xci",
         "inst_hier_path": "axi_interconnect_1",
         "xci_name": "design_1_axi_interconnect_1_0",
         "parameters": {
@@ -537,7 +537,7 @@
               "auto_pc": {
                 "vlnv": "xilinx.com:ip:axi_protocol_converter:2.1",
                 "xci_name": "design_1_auto_pc_1",
-                "xci_path": "ip\\design_1_auto_pc_1\\design_1_auto_pc_1.xci",
+                "xci_path": "ip/design_1_auto_pc_1/design_1_auto_pc_1.xci",
                 "inst_hier_path": "axi_interconnect_1/s00_couplers/auto_pc",
                 "parameters": {
                   "MI_PROTOCOL": {
@@ -632,7 +632,7 @@
       "processing_system7_0": {
         "vlnv": "xilinx.com:ip:processing_system7:5.5",
         "xci_name": "design_1_processing_system7_0_0",
-        "xci_path": "ip\\design_1_processing_system7_0_0\\design_1_processing_system7_0_0.xci",
+        "xci_path": "ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xci",
         "inst_hier_path": "processing_system7_0",
         "parameters": {
           "PCW_ACT_APU_PERIPHERAL_FREQMHZ": {
@@ -2263,6 +2263,9 @@
           },
           "PCW_WDT_PERIPHERAL_ENABLE": {
             "value": "0"
+          },
+          "preset": {
+            "value": "None"
           }
         },
         "interface_ports": {
@@ -2404,19 +2407,19 @@
       "rst_ps7_0_50M": {
         "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
         "xci_name": "design_1_rst_ps7_0_50M_0",
-        "xci_path": "ip\\design_1_rst_ps7_0_50M_0\\design_1_rst_ps7_0_50M_0.xci",
+        "xci_path": "ip/design_1_rst_ps7_0_50M_0/design_1_rst_ps7_0_50M_0.xci",
         "inst_hier_path": "rst_ps7_0_50M"
       },
       "core_controller_0": {
         "vlnv": "xilinx.com:user:core_controller:1.0",
         "xci_name": "design_1_core_controller_0_0",
-        "xci_path": "ip\\design_1_core_controller_0_0\\design_1_core_controller_0_0.xci",
+        "xci_path": "ip/design_1_core_controller_0_0/design_1_core_controller_0_0.xci",
         "inst_hier_path": "core_controller_0"
       },
       "clangpu_0": {
         "vlnv": "xilinx.com:user:clangpu:1.0",
         "xci_name": "design_1_clangpu_0_0",
-        "xci_path": "ip\\design_1_clangpu_0_0\\design_1_clangpu_0_0.xci",
+        "xci_path": "ip/design_1_clangpu_0_0/design_1_clangpu_0_0.xci",
         "inst_hier_path": "clangpu_0",
         "interface_ports": {
           "INST_AXI": {

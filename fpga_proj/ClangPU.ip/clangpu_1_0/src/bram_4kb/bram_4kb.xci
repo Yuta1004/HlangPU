@@ -5,7 +5,7 @@
     "cell_name": "fetch/bram_4kb",
     "component_reference": "xilinx.com:ip:blk_mem_gen:8.4",
     "ip_revision": "5",
-    "gen_directory": "../../../../../../../../../../../users/ynakagami/develop/projects/mitou2023/clangpu/fpga_proj/clangpu.tmp/clangpu_v1_0_project/clangpu_v1_0_project.gen/sources_1/ip/bram_4kb",
+    "gen_directory": "../../../../ClangPU.tmp/clangpu_v1_0_project/clangpu_v1_0_project.gen/sources_1/ip/bram_4kb",
     "parameters": {
       "component_parameters": {
         "Component_Name": [ { "value": "bram_4kb", "resolve_type": "user", "usage": "all" } ],
@@ -177,7 +177,7 @@
         "IPCONTEXT": [ { "value": "IP_Flow" } ],
         "IPREVISION": [ { "value": "5" } ],
         "MANAGED": [ { "value": "TRUE" } ],
-        "OUTPUTDIR": [ { "value": "../../../../../../../../../../../users/ynakagami/develop/projects/mitou2023/clangpu/fpga_proj/clangpu.tmp/clangpu_v1_0_project/clangpu_v1_0_project.gen/sources_1/ip/bram_4kb" } ],
+        "OUTPUTDIR": [ { "value": "../../../../ClangPU.tmp/clangpu_v1_0_project/clangpu_v1_0_project.gen/sources_1/ip/bram_4kb" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "." } ],
         "SWVERSION": [ { "value": "2022.2" } ],
