@@ -9,7 +9,7 @@ module core_controller_auto_generated #
         output wire         CRST,
         output wire         CEXEC,
         output wire [31:0]  CMEM_ADDR,
-        input wire  [7:0]   CSTAT,
+        input wire  [15:0]  CSTAT,
 
         // AXIバス
         input wire                              S_AXI_ACLK,
@@ -75,7 +75,7 @@ module core_controller_auto_generated #
     /* ----- 接続回路 ==> AXIバス ----- */
 
     // 接続回路からの入力
-    reg [7:0] icache_slv_reg3 [0:1];
+    reg [15:0] icache_slv_reg3 [0:1];
 
     always @ (posedge S_AXI_ACLK) begin
         icache_slv_reg3[1] <= icache_slv_reg3[0]; icache_slv_reg3[0] <= CSTAT;

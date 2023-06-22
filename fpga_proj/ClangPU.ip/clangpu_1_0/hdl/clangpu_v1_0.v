@@ -74,7 +74,7 @@ module core #
         input wire          CRST,
         input wire          CEXEC,
         input wire  [31:0]  CMEM_ADDR,
-        output wire [7:0]   CSTAT
+        output wire [15:0]  CSTAT
     );
 
     /* ----- AXIバス設定 ----- */
@@ -102,7 +102,10 @@ module core #
     assign M_AXI_BREADY = 1'b0;     // *
 
     /* ----- 状態 ----- */
-    assign CSTAT = { 5'b0, parser_stat[2:0] };
+    assign CSTAT = {
+        exec_o_result,          // [15:8] : RESULT
+        5'b0, parser_stat[2:0]  // [ 2:0] : PARSE STAT
+    };
 
     /* ----- フェッチ部 ----- */
     wire        mem_wait, fetch_o_valid;
@@ -340,6 +343,7 @@ module core #
 
     wire        exec_receive;
     reg         exec_i_valid;
+    wire [7:0]  exec_o_result;
 
     wire [15:0] exec_i_shift    = pfifo_o_data[31:16];
     wire [15:0] exec_i_reduce   = pfifo_o_data[15:0];
@@ -397,8 +401,8 @@ module core #
         // 入出力
         .I_VALID    (exec_i_valid),
         .I_SHIFT    (exec_i_shift),
-        .I_REDUCE   (exec_i_reduce)
-        // .O_RESULT   ()
+        .I_REDUCE   (exec_i_reduce),
+        .O_RESULT   (exec_o_result)
     );
 
 endmodule

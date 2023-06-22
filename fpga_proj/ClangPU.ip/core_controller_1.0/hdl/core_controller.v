@@ -9,7 +9,7 @@ module core_controller #
         output wire         CRST,
         output wire         CEXEC,
         output wire [31:0]  CMEM_ADDR,
-        input wire  [7:0]   CSTAT,
+        input wire  [15:0]  CSTAT,
 
         // AXIバス
         input wire                              S_AXI_ACLK,
