@@ -240,6 +240,12 @@ module core #
     reg         parser_i_valid;
     reg  [15:0] parser_i_token;
 
+    reg         pfifo_o_en;
+    wire        pfifo_o_empty;
+    wire [31:0] pfifo_o_data;
+
+    wire [31:0] pfifo_i_data = { parser_o_shift, parser_o_reduce };
+
     always @ (posedge CCLK) begin
         if (CRST)
             p_state <= S_P_READY;
@@ -309,6 +315,90 @@ module core #
         .O_VALID    (parser_o_valid),
         .O_SHIFT    (parser_o_shift),
         .O_REDUCE   (parser_o_reduce)
+    );
+
+    fifo_32in_32out_1024 pfifo (
+        // クロック&リセット
+        .clk    (CCLK),
+        .srst   (CRST),
+
+        // 入出力
+        // .full        (),
+        .din            (pfifo_i_data),
+        .wr_en          (parser_o_valid),
+        .dout           (pfifo_o_data),
+        .rd_en          (pfifo_o_en),
+        .empty          (pfifo_o_empty)
+        // .valid       ()
+    );
+
+    /* ----- 実行部 ----- */
+    parameter S_E_READY = 2'b00;
+    parameter S_E_WAIT  = 2'b01;
+
+    reg [1:0]   e_state, e_next_state;
+
+    wire        exec_receive;
+    reg         exec_i_valid;
+
+    wire [15:0] exec_i_shift    = pfifo_o_data[31:16];
+    wire [15:0] exec_i_reduce   = pfifo_o_data[15:0];
+
+    always @ (posedge CCLK) begin
+        if (CRST)
+            e_state <= S_E_READY;
+        else
+            e_state <= e_next_state;
+    end
+
+    always @* begin
+        case (e_state)
+            S_E_READY:
+                if (!pfifo_o_empty)
+                    e_next_state <= S_E_WAIT;
+                else
+                    e_next_state <= S_E_READY;
+            
+            S_E_WAIT:
+                if (exec_receive)
+                    e_next_state <= S_E_READY;
+                else
+                    e_next_state <= S_E_WAIT;
+            
+            default:
+                e_next_state <= S_E_READY;
+        endcase
+    end
+
+    always @ (posedge CCLK) begin
+        if (CRST)
+            pfifo_o_en <= 1'b0;
+        else if (e_state == S_E_READY && !pfifo_o_empty)
+            pfifo_o_en <= 1'b1;
+        else
+            pfifo_o_en <= 1'b0;
+    end
+
+    always @ (posedge CCLK) begin
+        if (CRST)
+            exec_i_valid <= 1'b0;
+        else if (e_state == S_E_WAIT)
+            exec_i_valid <= !exec_receive;
+    end
+
+    exec exec (
+        // クロック&リセット
+        .CLK    (CCLK),
+        .RST    (CRST),
+
+        // 制御
+        .RECEIVE    (exec_receive),
+
+        // 入出力
+        .I_VALID    (exec_i_valid),
+        .I_SHIFT    (exec_i_shift),
+        .I_REDUCE   (exec_i_reduce)
+        // .O_RESULT   ()
     );
 
 endmodule

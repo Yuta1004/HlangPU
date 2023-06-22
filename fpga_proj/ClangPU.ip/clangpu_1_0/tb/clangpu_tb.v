@@ -55,6 +55,25 @@ wire [15:0]     PARSER_O_REDUCE = core.parser.O_REDUCE;
 // wire [7:0]      PARSER_S_TOP    = core.parser.top_data;
 // wire [7:0]      PARSER_R_MEMO   = core.parser.reduce_memo;
 
+wire            EXEC_I_VALID    = core.exec.I_VALID;
+wire [15:0]     EXEC_I_SHIFT    = core.exec.I_SHIFT;
+wire [15:0]     EXEC_I_REDUCE   = core.exec.I_REDUCE;
+wire [7:0]      EXEC_O_RESULT   = core.exec.O_RESULT;
+wire            EXEC_RECEIVE    = core.exec.RECEIVE;
+wire [7:0]      EXEC_POPNUMS    = core.exec.pop_nums;
+wire            EXEC_PUSH       = core.exec.vlifo_push_en;
+wire [7:0]      EXEC_PUSHD      = core.exec.vlifo_push_data;
+wire            EXEC_POP        = core.exec.vlifo_pop_en;
+wire [7:0]      EXEC_POPD       = core.exec.vlifo_pop_data;
+wire [7:0]      EXEC_PDATA_0    = core.exec.poped_values[0];
+wire [7:0]      EXEC_PDATA_1    = core.exec.poped_values[1];
+wire [7:0]      EXEC_PDATA_2    = core.exec.poped_values[2];
+wire [7:0]      EXEC_PDATA_3    = core.exec.poped_values[3];
+wire [7:0]      EXEC_PDATA_4    = core.exec.poped_values[4];
+wire [7:0]      EXEC_PDATA_5    = core.exec.poped_values[5];
+wire [7:0]      EXEC_PDATA_6    = core.exec.poped_values[6];
+wire [7:0]      EXEC_PDATA_7    = core.exec.poped_values[7];
+
 /* ----- 命令書き込み ----- */
 task write_inst;
 reg [8:0] c;
