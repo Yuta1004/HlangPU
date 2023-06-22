@@ -12,7 +12,14 @@
 int main(void) {
 	Xil_DCacheDisable();
 
-	char *program = "10 + 20 - 30 + 40 - 50 EOF \0";
+	char *program = "\
+		10 + 20 - 30 + 40 - 50 ;\
+		a = 10 ; \
+		b = 20 ; \
+		c = 30 ; \
+		if ( 40 - 20 + 30 ) a = 50 ; \
+ 		EOF \0 \
+	";
 	strcpy(INST_MEM, program);
 
 	CRST = 0;

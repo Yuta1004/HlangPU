@@ -23,8 +23,8 @@
       },
       "processing_system7_0": "",
       "rst_ps7_0_50M": "",
-      "clangpu_0": "",
-      "core_controller_0": ""
+      "core_controller_0": "",
+      "clangpu_0": ""
     },
     "interface_ports": {
       "DDR": {
@@ -2407,6 +2407,12 @@
         "xci_path": "ip\\design_1_rst_ps7_0_50M_0\\design_1_rst_ps7_0_50M_0.xci",
         "inst_hier_path": "rst_ps7_0_50M"
       },
+      "core_controller_0": {
+        "vlnv": "xilinx.com:user:core_controller:1.0",
+        "xci_name": "design_1_core_controller_0_0",
+        "xci_path": "ip\\design_1_core_controller_0_0\\design_1_core_controller_0_0.xci",
+        "inst_hier_path": "core_controller_0"
+      },
       "clangpu_0": {
         "vlnv": "xilinx.com:user:clangpu:1.0",
         "xci_name": "design_1_clangpu_0_0",
@@ -2432,12 +2438,6 @@
             }
           }
         }
-      },
-      "core_controller_0": {
-        "vlnv": "xilinx.com:user:core_controller:1.0",
-        "xci_name": "design_1_core_controller_0_0",
-        "xci_path": "ip\\design_1_core_controller_0_0\\design_1_core_controller_0_0.xci",
-        "inst_hier_path": "core_controller_0"
       }
     },
     "interface_nets": {
@@ -2515,15 +2515,15 @@
           "processing_system7_0/M_AXI_GP0_ACLK",
           "processing_system7_0/S_AXI_HP0_ACLK",
           "rst_ps7_0_50M/slowest_sync_clk",
-          "clangpu_0/ACLK",
-          "core_controller_0/S_AXI_ACLK"
+          "core_controller_0/S_AXI_ACLK",
+          "clangpu_0/ACLK"
         ]
       },
       "processing_system7_0_FCLK_CLK2": {
         "ports": [
           "processing_system7_0/FCLK_CLK2",
-          "clangpu_0/CCLK",
-          "core_controller_0/CCLK"
+          "core_controller_0/CCLK",
+          "clangpu_0/CCLK"
         ]
       },
       "processing_system7_0_FCLK_RESET0_N": {
@@ -2541,8 +2541,8 @@
           "axi_interconnect_1/ARESETN",
           "axi_interconnect_1/S00_ARESETN",
           "axi_interconnect_1/M00_ARESETN",
-          "clangpu_0/ARESETN",
-          "core_controller_0/S_AXI_ARSTN"
+          "core_controller_0/S_AXI_ARSTN",
+          "clangpu_0/ARESETN"
         ]
       }
     },
