@@ -13,8 +13,8 @@ module lifo_8in_8out_1024
         input wire          I_VALID,
         input wire  [7:0]   I_DATA,
         input wire          O_EN,
-        output reg          O_VALID,
-        output reg  [7:0]   O_DATA,
+        output wire         O_VALID,
+        output wire [7:0]   O_DATA,
         output wire [7:0]   TOP_DATA
     );
 
@@ -24,6 +24,8 @@ module lifo_8in_8out_1024
     assign FULL     = sp == 10'h3ff;
     assign EMPTY    = sp == 10'b1;
 
+    assign O_VALID  = O_EN && !EMPTY;
+    assign O_DATA   = mem[sp-10'd1];
     assign TOP_DATA = (I_VALID && !FULL) ? I_DATA :
                       (O_EN && !EMPTY)   ? sp < 10'd2 ? 8'b0 : mem[sp-10'd2] : mem[sp-10'd1];
 
@@ -36,13 +38,8 @@ module lifo_8in_8out_1024
             sp <= sp + 10'b1;
             mem[sp] <= I_DATA;
         end
-        else if (O_EN && !EMPTY) begin
+        else if (O_EN && !EMPTY)
             sp <= sp - 10'b1;
-            O_VALID <= 1'b1;
-            O_DATA <= mem[sp-10'd1];
-        end
-        else
-            O_VALID <= 1'b0;
     end
 
 endmodule
