@@ -1,7 +1,5 @@
 # ClangPU(fpga_proj)
 
-C-language PU
-
 ## ディレクトリ構成
 
 - ClangPU.ip/ : IP
@@ -10,4 +8,3 @@ C-language PU
 - ClangPU.sim/ : シミュレーションプロジェクト用
     - clangpu_ip : ClangPU IP シミュレーションプロジェクト
 - ClangPU.sw/ : Vitisプロジェクト
-
