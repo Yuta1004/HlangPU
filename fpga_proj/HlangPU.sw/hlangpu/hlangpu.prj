@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="ASCII"?>
-<sdkproject:SdkProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" name="hlangpu" location="/home/yn0014/Develop/projects/mitou2023/HlangPU/fpga_proj/HlangPU.sw/hlangpu" platform="/home/yn0014/Develop/projects/mitou2023/HlangPU/fpga_proj/HlangPU.sw/design_1_wrapper/export/design_1_wrapper/design_1_wrapper.xpfm" platformUID="xilinx:zybo-z7-10::0.0(custom)" systemProject="hlangpu_system" sysConfig="design_1_wrapper" runtime="cpp" cpu="standalone_ps7_cortexa9_0" cpuInstance="ps7_cortexa9_0" os="standalone" mssSignature="301a4e16f8bee359d00e36edd3e59d45">
-  <configuration name="Debug" id="xilinx.gnu.armv7.exe.debug.522462990">
+<sdkproject:SdkProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" name="hlangpu" location="C:/Users/YNakagami/Develop/projects/mitou2023/HlangPU/fpga_proj/HlangPU.sw/hlangpu" platform="C:/Users/YNakagami/Develop/projects/mitou2023/HlangPU/fpga_proj/HlangPU.sw/design_1_wrapper/export/design_1_wrapper/design_1_wrapper.xpfm" platformUID="xilinx:zybo-z7-10::0.0(custom)" systemProject="hlangpu_system" sysConfig="design_1_wrapper" runtime="cpp" cpu="standalone_ps7_cortexa9_0" cpuInstance="ps7_cortexa9_0" os="standalone" mssSignature="1a30cda1d587344df091c99ec06b7656">
+  <configuration name="Debug" id="xilinx.gnu.armv7.exe.debug.492989173">
     <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
     <lastBuildOptions xsi:type="sdkproject:SdkOptions"/>
   </configuration>
-  <configuration name="Release" id="xilinx.gnu.armv7.exe.release.984592824" dirty="true">
+  <configuration name="Release" id="xilinx.gnu.armv7.exe.release.916441601" dirty="true">
     <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
   </configuration>
-  <template appTemplateName="empty_application"/>
+  <template appTemplateName="hello_world"/>
 </sdkproject:SdkProject>
